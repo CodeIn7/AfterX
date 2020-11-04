@@ -1,4 +1,4 @@
-[submodule "AndroidApp/AfterXDesktopApp"]
+[submodule "AfterXDesktopApp"]
 	path = AndroidApp/AfterXDesktopApp
 	url = https://github.com/CodeIn7/AfterXDesktopApp.git
 [submodule "AfterXMobileApp"]
