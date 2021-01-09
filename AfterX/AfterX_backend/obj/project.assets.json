@@ -8064,11 +8064,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX\\AfterX_backend.csproj",
+      "projectUniqueName": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX_backend\\AfterX_backend.csproj",
       "projectName": "AfterX_backend",
-      "projectPath": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX\\AfterX_backend.csproj",
+      "projectPath": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX_backend\\AfterX_backend.csproj",
       "packagesPath": "C:\\Users\\zpandzic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX\\obj\\",
+      "outputPath": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX_backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\zpandzic\\AppData\\Roaming\\NuGet\\NuGet.Config",

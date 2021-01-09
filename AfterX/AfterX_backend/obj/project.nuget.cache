@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8vkT6psX77eAx49IKhrkrK/SZMz0PwfPp1zN7ivmoNci2+1+SsYmCp6WrBV9k9ya8+7SarS6D51sCp9V1bhsNA==",
+  "dgSpecHash": "HcDaCgI/XUAyHtaPe33kE/gUhdMYdlfTHYyQl7ueXzTuXiv3LPRy6oiqz9yPQ5GkhSD2vjKteqEN4IZut6+PSw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX\\AfterX_backend.csproj",
+  "projectFilePath": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX_backend\\AfterX_backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zpandzic\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\zpandzic\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.1\\microsoft.aspnetcore.cryptography.internal.5.0.1.nupkg.sha512",
