@@ -1,9 +1,0 @@
-[submodule "AfterXMobileApp"]
-	path = AfterXMobileApp
-	url = https://github.com/CodeIn7/AfterXMobileApp.git
-[submodule "AfterXWebApp"]
-	path = AfterXWebApp
-	url = https://github.com/CodeIn7/AfterXWebApp.git
-[submodule "AfterXDesktopApp"]
-	path = AfterXDesktopApp
-	url = https://github.com/CodeIn7/AfterXDesktopApp.git
