@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
 
 namespace AfterX
 {
-    public partial class User
+    public partial class User : IdentityUser<int>
     {
         public User()
         {
@@ -13,9 +14,9 @@ namespace AfterX
             Reviews = new HashSet<Review>();
         }
 
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        //public int Id { get; set; }
+        //public string Email { get; set; }
+        //public string Password { get; set; }
 
         public virtual Userattribue Userattribue { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AfterX;
-using AfterX.Data;
 using AfterX.Installers;
 using AfterX.Services;
 using Microsoft.AspNetCore.Identity;
@@ -22,8 +21,13 @@ namespace EciTimeSheetWebApi.Installers
                 AddDbContext<DataContext>(options =>
                 options.UseNpgsql(
                     configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<DataContext>();
+
+            //services.AddDefaultIdentity<User>()
+            // .AddEntityFrameworkStores<DataContext>()
+            // .AddDefaultTokenProviders();
 
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<IRoleService, RoleService>();
