@@ -1,0 +1,3 @@
+C:\Users\Dinko\AfterX\AfterX\AfterX_frontend\obj\Debug\AfterX_frontend.njsprojAssemblyReference.cache
+C:\Users\Dinko\AfterX\AfterX\AfterX_frontend\obj\Debug\AfterX_frontend.njsproj.CoreCompileInputs.cache
+C:\Users\Dinko\AfterX\AfterX\AfterX_frontend\bin\Microsoft.NodejsTools.WebRole.dll
