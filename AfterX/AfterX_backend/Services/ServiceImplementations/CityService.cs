@@ -1,5 +1,4 @@
-﻿using AfterX.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +28,7 @@ namespace AfterX.Services
 
         public async Task<bool> UpdateCityAsync(City cityToUpdate)
         {
-            //await _dataContext.Cities.Upda(cityToUpdate);
+            _dataContext.Update(cityToUpdate);
             var updated = await _dataContext.SaveChangesAsync();
 
             return updated > 0;

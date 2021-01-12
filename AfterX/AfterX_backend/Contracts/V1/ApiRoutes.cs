@@ -26,5 +26,10 @@ namespace AfterX.Contracts.V1
             public const string Delete = Base + "/roles/{roleId}";
             public const string Get = Base + "/roles/{roleId}";
         }
+        public static class Identity
+        {
+            public const string Register = Base + "/idnetity/register";
+            public const string Login = Base + "/idnetity/login";
+        }
     }
 }

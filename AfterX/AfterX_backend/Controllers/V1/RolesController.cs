@@ -10,13 +10,16 @@ using AfterX.Contracts.V1;
 using AfterX.Services;
 using AfterX.Contracts.V1.Responses;
 using AfterX.Contracts.V1.Requests;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AfterX.Controllers.V1
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class RolesController : Controller
     {
         private IRoleService _roleService;
-
         public RolesController(IRoleService roleService)
         {
             _roleService = roleService;
