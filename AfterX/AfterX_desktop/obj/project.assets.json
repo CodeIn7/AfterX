@@ -8,25 +8,20 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Dora\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\zpandzic\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dora\\Faks\\oo\\projekt\\AfterX\\AfterX\\AfterX_desktop\\AfterX_desktop.csproj",
+      "projectUniqueName": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX_desktop\\AfterX_desktop.csproj",
       "projectName": "AfterX_desktop",
-      "projectPath": "C:\\Users\\Dora\\Faks\\oo\\projekt\\AfterX\\AfterX\\AfterX_desktop\\AfterX_desktop.csproj",
-      "packagesPath": "C:\\Users\\Dora\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dora\\Faks\\oo\\projekt\\AfterX\\AfterX\\AfterX_desktop\\obj\\",
+      "projectPath": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX_desktop\\AfterX_desktop.csproj",
+      "packagesPath": "C:\\Users\\zpandzic\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\zpandzic\\Projekti\\AfterX\\AfterX\\AfterX_desktop\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Dora\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\zpandzic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -68,7 +63,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
