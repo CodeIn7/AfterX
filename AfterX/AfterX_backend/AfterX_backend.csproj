@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-AfterX-FA692CCE-B637-4BC2-B435-47365F616B42</UserSecretsId>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>

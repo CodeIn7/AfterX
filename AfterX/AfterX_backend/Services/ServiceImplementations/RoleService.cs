@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AfterX;
+using AfterX.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AfterX.Services
+namespace AfterX_backend.Services.ServiceImplementations
 {
     public class RoleService : IRoleService
     {

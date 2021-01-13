@@ -10,9 +10,18 @@ namespace AfterX.Contracts.V1
         public const string Root = "api";
         public const string Version = "v1";
         public const string Base = Root + "/" + Version;
+
+        public static class Clubs
+        {
+            public const string GetAll = Base + "/clubs";
+            public const string Create = Base + "/clubs";
+            public const string Update = Base + "/clubs/{clubId}";
+            public const string Delete = Base + "/clubs/{clubId}";
+            public const string Get = Base + "/clubs/{clubId}";
+        }
         public static class Cities
         {
-            public const string GetAll = Base + "/cities";   
+            public const string GetAll = Base + "/cities";
             public const string Create = Base + "/cities";
             public const string Update = Base + "/cities/{cityId}";
             public const string Delete = Base + "/cities/{cityId}";

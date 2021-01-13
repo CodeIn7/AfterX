@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AfterX.Controllers.V1
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class RolesController : Controller
     {
         private IRoleService _roleService;

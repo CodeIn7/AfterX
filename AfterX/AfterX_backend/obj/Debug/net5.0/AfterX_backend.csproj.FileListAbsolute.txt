@@ -322,8 +322,6 @@ C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.AssemblyInfoInputs.cache
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.AssemblyInfo.cs
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.csproj.CoreCompileInputs.cache
-C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\staticwebassets\AfterX_backend.StaticWebAssets.Manifest.cache
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\staticwebassets\AfterX_backend.StaticWebAssets.xml
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\scopedcss\bundle\AfterX_backend.styles.css
@@ -333,3 +331,5 @@ C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\ref\AfterX_backend.dll
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.pdb
 C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.genruntimeconfig.cache
+C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\zpandzic\Projekti\AfterX\AfterX\AfterX_backend\obj\Debug\net5.0\AfterX_backend.MvcApplicationPartsAssemblyInfo.cache

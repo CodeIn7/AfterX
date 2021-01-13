@@ -2,6 +2,7 @@
 using AfterX.Contracts.V1.Requests;
 using AfterX.Contracts.V1.Responses;
 using AfterX.Services;
+using AfterX_backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,24 @@ using System.Threading.Tasks;
 
 namespace AfterX.Controllers
 {
-    public class TestController : Controller
+    public class CitiesController : Controller
     {
         private ICityService _cityService;
-        public TestController(ICityService cityService)
+        public CitiesController(ICityService cityService)
         {
             _cityService = cityService;
         }
 
 
         [HttpGet(ApiRoutes.Cities.GetAll)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             return Ok(await _cityService.GetCitiesAsync());
         }
 
 
         [HttpGet(ApiRoutes.Cities.Get)]
-        public async Task<IActionResult> GetAll([FromRoute] int cityId)
+        public async Task<IActionResult> Get([FromRoute] int cityId)
         {
             var city = await _cityService.GetCityByIdAsync(cityId);
 

@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AfterX;
+using AfterX_backend.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AfterX.Services
+namespace AfterX_backend.Services.ServiceImplementations
 {
     public class CityService : ICityService
     {
@@ -16,7 +18,9 @@ namespace AfterX.Services
         }
         public async Task<List<City>> GetCitiesAsync()
         {
-            return await _dataContext.Cities.ToListAsync();
+            var list = await _dataContext.Cities.ToListAsync();
+
+            return list;
         }
 
         public async Task<City> GetCityByIdAsync(int cityId)

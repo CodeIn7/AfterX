@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using AfterX;
 using AfterX.Installers;
 using AfterX.Services;
+using AfterX_backend.Services.Interfaces;
+using AfterX_backend.Services.ServiceImplementations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,8 +31,15 @@ namespace EciTimeSheetWebApi.Installers
             // .AddEntityFrameworkStores<DataContext>()
             // .AddDefaultTokenProviders();
 
+            services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IClubService, ClubService>();
+
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ITableService, TableService>();
+            services.AddScoped<ITableTypeService, TableTypeService>();
+
+
         }
     }
 }
