@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.container{
+    width: 80%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 2%;
+}
+.header{
+    align-self: center;
+    
+}
+.header h1{
+    color:#707070;
+    font-family: 'Roboto', sans-serif;
+    font-size: 3em;
+}
+.Autocomplete{
+    align-self: center;
+    width: 80%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+
+}
+.tableSelect{
+    align-self: flex-start;
+    width: 80%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.AutocompleteInput{
+    align-self: center;
+    width: 100%;
+}
+.AutocompleteInputTables{
+    align-self: center;
+    width: 30%;
+}
+.DateTime{
+    margin-top:10px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between  ;
+    align-self: center;
+}
+.thirdRow{
+    margin-top:10px;
+    width:80% ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.peopleNumber{
+    align-self: center;
+    width: 30%;
+}
+.subimt{
+    align-self: center;
+    width: 10%;
+}

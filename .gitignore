@@ -361,3 +361,4 @@ MigrationBackup/
 AfterX/.vs/AfterX/v16/.suo
 AfterX/AfterX_desktop/obj/
 AfterX/AfterX_desktop/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs
+AfterX/AfterX_frontend/.eslintcache

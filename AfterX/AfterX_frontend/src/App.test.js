@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
