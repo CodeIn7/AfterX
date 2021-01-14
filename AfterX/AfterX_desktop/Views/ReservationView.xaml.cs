@@ -13,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using AfterX_desktop.ViewModels;
-namespace AfterX_desktop
+namespace AfterX_desktop.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ReservationView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ReservationView : UserControl
     {
-        ReservationViewModel ViewModel;
-        public MainWindow()
+        public ReservationView()
         {
             InitializeComponent();
-            ViewModel = new ReservationViewModel();
-            this.DataContext = ViewModel;
         }
     }
 }
