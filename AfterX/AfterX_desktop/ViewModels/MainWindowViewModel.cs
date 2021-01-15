@@ -31,8 +31,7 @@ namespace AfterX_desktop.ViewModels
             }
             set
             {
-                _currentPageViewModel = value;
-                OnPropertyChanged("CurrentPageViewModel");
+                _currentPageViewModel = value; OnPropertyChanged("CurrentPageViewModel");
             }
         }
 
@@ -41,8 +40,7 @@ namespace AfterX_desktop.ViewModels
             if (!PageViewModels.Contains(viewModel))
                 PageViewModels.Add(viewModel);
 
-            CurrentPageViewModel = PageViewModels
-                .FirstOrDefault(vm => vm == viewModel);
+            CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
         }
 
         private void seeReservations(object obj)
@@ -53,7 +51,6 @@ namespace AfterX_desktop.ViewModels
 
         public MainWindowViewModel()
         {
-            // Add available pages and set page
             PageViewModels.Add(new LoginViewModel());
             PageViewModels.Add(new ReservationViewModel());
 

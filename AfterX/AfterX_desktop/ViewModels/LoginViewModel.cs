@@ -10,15 +10,21 @@ namespace AfterX_desktop.ViewModels
 {
     class LoginViewModel : BaseViewModel, IPageViewModel
     {
-        private ICommand _loginCommand;
 
-        public ICommand LoginCommand
+        public LoginViewModel()
         {
-            get
-            {
-                return _loginCommand ?? (_loginCommand = new RelayCommand(x => Mediator.Notify("seeReservations", "")));
-            }
+            loginCommand = new RelayCommand(Login);
+        }
+        private RelayCommand loginCommand;
+
+        public RelayCommand LoginCommand
+        {
+            get{ return loginCommand;}
         }
 
+        public void Login()
+        {
+            Mediator.Notify("seeReservations", "");
+        }
     }
 }

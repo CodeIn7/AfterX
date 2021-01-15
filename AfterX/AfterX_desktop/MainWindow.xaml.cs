@@ -21,7 +21,7 @@ namespace AfterX_desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        ReservationViewModel ViewModel;
+       
         public MainWindow()
         {
             InitializeComponent();

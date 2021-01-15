@@ -8,9 +8,8 @@ namespace AfterX_desktop.Commands
 {
     public static class Mediator
     {
-        private static IDictionary<string, List<Action<object>>> pl_dict =
-           new Dictionary<string, List<Action<object>>>();
-
+        private static IDictionary<string, List<Action<object>>> pl_dict = new Dictionary<string, List<Action<object>>>();
+        
         public static void Subscribe(string token, Action<object> callback)
         {
             if (!pl_dict.ContainsKey(token))

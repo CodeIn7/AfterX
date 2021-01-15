@@ -23,12 +23,5 @@ namespace AfterX_desktop.Views
         {
             InitializeComponent();
         }
-
-        private void btn_login_Click(object sender, RoutedEventArgs e)
-        {
-            ReservationViewModel reservationViewModel = new ReservationViewModel();
-            this.DataContext = reservationViewModel;
-            
-        }
     }
 }

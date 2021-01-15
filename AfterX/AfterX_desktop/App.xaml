@@ -19,10 +19,5 @@
                 <views:ReservationView/>
             </DataTemplate>
         </ResourceDictionary>
-        
-        
     </Application.Resources>
-  
-
-  
 </Application>
