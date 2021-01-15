@@ -8,6 +8,6 @@
         Title="MainWindow" Height="450" Width="800"
         xmlns:vw="clr-namespace:AfterX_desktop.Views">
     <Grid>
-        <vw:ReservationView></vw:ReservationView>
+        <vw:LoginView></vw:LoginView>
     </Grid>
 </Window>
