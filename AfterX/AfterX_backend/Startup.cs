@@ -57,6 +57,7 @@ namespace AfterX
                 options.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
             });
 
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

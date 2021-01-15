@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from '../axios';
 import { LOGIN_USER, REGISTER_USER, AUTH_USER, LOGOUT_USER } from './types';
 import { USER_SERVER } from '../components/Config.js';
 
 export function registerUser(dataToSubmit) {
   const request = axios
-    .post(`${USER_SERVER}/register`, dataToSubmit)
+    .post('idnetity/register', dataToSubmit)
     .then((response) => response.data);
 
   return {
@@ -13,9 +13,9 @@ export function registerUser(dataToSubmit) {
   };
 }
 
-export function loginUser(dataToSubmit) {
+export function loginUser(loginData) {
   const request = axios
-    .post(`${USER_SERVER}/login`, dataToSubmit)
+    .post(`${USER_SERVER}/login`, loginData)
     .then((response) => response.data);
 
   return {

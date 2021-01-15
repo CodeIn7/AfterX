@@ -17,18 +17,23 @@ function App() {
     <Suspense fallback={<div>Loading...</div>}>
       <div style={{ paddingTop: '0px', minHeight: 'calc(100vh - 80px)' }}>
         <Switch>
-          <Route exact path="/" component={Auth(LandingPage, null)} />
+          {/* <Route exact path="/" component={Auth(LandingPage, null)} /> */}
+          <Route exact path="/" component={LandingPage} />
           <Route
             exact
             path="/BartenderLanding"
-            component={Auth(BartenderLandingPage, true)}
+            component={BartenderLandingPage}
+            //  component={Auth(BartenderLandingPage, true)}
           />
-          <Route exact path="/login" component={Auth(BartenderLogin, null)} />
-          <Route exact path="/User" component={Auth(UserLandingPage, null)} />
+          {/* <Route exact path="/login" component={Auth(BartenderLogin, null)} /> */}
+          <Route exact path="/login" component={BartenderLogin} />
+          {/* <Route exact path="/User" component={Auth(UserLandingPage, null)} /> */}
+          <Route exact path="/User" component={UserLandingPage} />
           <Route
             exact
             path="/register"
-            component={Auth(BartenderRegister, null)}
+            // component={Auth(BartenderRegister, null)}
+            component={BartenderRegister}
           />
         </Switch>
         <CustomChatbot />

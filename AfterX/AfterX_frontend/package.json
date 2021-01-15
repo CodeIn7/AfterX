@@ -46,10 +46,7 @@
   "eslintConfig": {
     "extends": [
       "wesbos"
-    ],
-    "rules":{
-      "semi":[2,"always"]
-    }
+    ]
   },
   "browserslist": {
     "production": [

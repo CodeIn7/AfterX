@@ -11,5 +11,8 @@ namespace AfterX_backend.Contracts.V1.Requests
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public char Gender { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Telephone { get; set; }
     }
 }
