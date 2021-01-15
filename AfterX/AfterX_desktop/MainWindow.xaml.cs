@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using AfterX_desktop.ViewModels;
 namespace AfterX_desktop
 {
     /// <summary>
@@ -20,9 +21,12 @@ namespace AfterX_desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        ReservationViewModel ViewModel;
         public MainWindow()
         {
             InitializeComponent();
+            ViewModel = new ReservationViewModel();
+            this.DataContext = ViewModel;
         }
     }
 }
