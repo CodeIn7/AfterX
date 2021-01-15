@@ -29,11 +29,12 @@
                    FontWeight="Bold"
                    HorizontalAlignment="Center" Padding="3"/>
         <DataGrid Name="dgReservations"
-                  AutoGenerateColumns="False"
-                  Grid.Row="1"
-                  Grid.Column="1" Padding="3" Margin="5,8"
-                  IsReadOnly="True"
-                  ItemsSource="{Binding Path=ReservationsList, Mode=TwoWay}">
+                    AutoGenerateColumns="False"
+                    Grid.Row="1"
+                    Grid.Column="1" Padding="3" Margin="5,8"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding Path=ReservationsList, Mode=TwoWay}"
+                    MouseDoubleClick="DetaljiRezervacije">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id"
                                     Width="auto"

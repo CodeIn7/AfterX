@@ -14,7 +14,8 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" FontSize="48" Text="AfterX" HorizontalAlignment="Center"/>
+            <!--<TextBlock Grid.Row="0" FontSize="48" Text="AfterX" HorizontalAlignment="Center"/>-->
+            <Image Source="/Images/AfterX.png" Grid.Row="0" Width="50"/>
 
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>

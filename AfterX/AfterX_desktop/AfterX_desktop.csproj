@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\AfterX.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AfterX_backend\AfterX_backend.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\AfterX.png" />
   </ItemGroup>
 
 </Project>
