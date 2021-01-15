@@ -25,8 +25,7 @@ namespace AfterX_desktop
         public MainWindow()
         {
             InitializeComponent();
-            ViewModel = new ReservationViewModel();
-            this.DataContext = ViewModel;
+
         }
     }
 }

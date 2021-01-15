@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace AfterX_desktop.ViewModels
 {
-    public class ReservationViewModel : INotifyPropertyChanged
+    public class ReservationViewModel : BaseViewModel, IPageViewModel
     {
         #region INotifyPropertyChanged_Implementation
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,7 +29,7 @@ namespace AfterX_desktop.ViewModels
             ObjReservationService = new ReservationService();
             LoadData();
             currentReservation = new Reservation();
-            searchCommand = new RelayCommand(Search);
+            
         }
 
         #region DisplayOperation
