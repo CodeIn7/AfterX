@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace AfterX_desktop.ViewModels
 {
-    public class ReservationViewModel : BaseViewModel, IPageViewModel
+    class OrderViewModel : BaseViewModel, IPageViewModel
     {
         /*#region INotifyPropertyChanged_Implementation
         public event PropertyChangedEventHandler PropertyChanged;
@@ -23,35 +23,35 @@ namespace AfterX_desktop.ViewModels
         }
         #endregion*/
 
-        ReservationService ObjReservationService;
-        public ReservationViewModel()
+        OrderService ObjOrderService;
+        public OrderViewModel()
         {
-            ObjReservationService = new ReservationService();
+            ObjOrderService = new OrderService();
             LoadData();
-            currentReservation = new Reservation();
-            
+            currentOrder = new Order();
+
         }
 
         #region DisplayOperation
-        private ObservableCollection<Reservation> reservationsList;
+        private ObservableCollection<Order> ordersList;
 
-        public ObservableCollection<Reservation> ReservationsList
+        public ObservableCollection<Order> OrdersList
         {
-            get { return reservationsList; }
-            set { reservationsList = value; OnPropertyChanged("ReservationsList"); }
+            get { return ordersList; }
+            set { ordersList = value; OnPropertyChanged("OrdersList"); }
         }
         private void LoadData()
         {
-            ReservationsList = new ObservableCollection<Reservation>(ObjReservationService.GetAll());
+            OrdersList = new ObservableCollection<Order>(ObjOrderService.GetAll());
         }
         #endregion
 
-        private Reservation currentReservation;
+        private Order currentOrder;
 
-        public Reservation CurrentReservation
+        public Order CurrentOrder
         {
-            get { return currentReservation; }
-            set { currentReservation = value; OnPropertyChanged("CurrentReservation"); }
+            get { return currentOrder; }
+            set { currentOrder = value; OnPropertyChanged("CurrentOrder"); }
         }
 
         private string message;
@@ -74,16 +74,20 @@ namespace AfterX_desktop.ViewModels
         {
             try
             {
-                var ObjReservation = ObjReservationService.Search(CurrentReservation.Id);
-                if (ObjReservation != null)
+                var ObjOrder = ObjOrderService.Search(CurrentOrder.Id);
+                if (ObjOrder != null)
                 {
-                    CurrentReservation.TableId = ObjReservation.TableId;
-                    CurrentReservation.UserId = ObjReservation.UserId;
-                    CurrentReservation.ReservationDate = ObjReservation.ReservationDate;
+                    CurrentOrder.TableId = ObjOrder.TableId;
+                    CurrentOrder.ReservationId = ObjOrder.ReservationId;
+                    CurrentOrder.Note = ObjOrder.Note;
+                    CurrentOrder.Time = ObjOrder.Time;
+                    CurrentOrder.Active = ObjOrder.Active;
+                    CurrentOrder.OrderDrinks = ObjOrder.OrderDrinks;
+
                 }
                 else
                 {
-                    Message = "Resrvation not found";
+                    Message = "Order not found";
                 }
             }
             catch (Exception ex)
@@ -94,3 +98,4 @@ namespace AfterX_desktop.ViewModels
         #endregion
     }
 }
+

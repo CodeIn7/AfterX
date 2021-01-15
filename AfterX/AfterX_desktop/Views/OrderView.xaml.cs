@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,15 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using AfterX_desktop.ViewModels;
 namespace AfterX_desktop.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for OrderView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class OrderView : UserControl
     {
-        public LoginView()
+        public OrderView()
         {
             InitializeComponent();
         }

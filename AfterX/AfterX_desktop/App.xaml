@@ -18,6 +18,9 @@
             <DataTemplate DataType="{x:Type viewmodels:ReservationViewModel}">
                 <views:ReservationView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:OrderViewModel}">
+                <views:OrderView/>
+            </DataTemplate>
         </ResourceDictionary>
         
         
