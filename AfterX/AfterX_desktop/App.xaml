@@ -22,10 +22,5 @@
                 <views:OrderView/>
             </DataTemplate>
         </ResourceDictionary>
-        
-        
     </Application.Resources>
-  
-
-  
 </Application>
