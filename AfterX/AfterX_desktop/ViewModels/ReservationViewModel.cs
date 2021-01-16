@@ -62,7 +62,7 @@ namespace AfterX_desktop.ViewModels
             set { message = value; OnPropertyChanged("Message"); }
         }
 
-        #region SearchOperation
+        /*#region SearchOperation
         private RelayCommand searchCommand;
 
         public RelayCommand SearchCommand
@@ -91,6 +91,6 @@ namespace AfterX_desktop.ViewModels
 
             }
         }
-        #endregion
+        #endregion*/
     }
 }

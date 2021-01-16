@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AfterX;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +10,41 @@ namespace AfterX_desktop.Models
     public class OrderService
     {
         private static List<Order> objOrderList;
+        //private static List<OrderDrink> objOrderDrinksList;
 
         public OrderService()
         {
             objOrderList = new List<Order>()
             {
                 new Order{Id = 100, TableId = "1", ReservationId = 101, Note = "blabla", Time = "22:00", Active = true, OrderDrinks = new List<OrderDrink>() { new OrderDrink("Coca-Cola", 2) } },
-                new Order{Id = 101, TableId = "2", ReservationId = 101, Note = "blabla", Time = "21:00", Active = false, OrderDrinks = new List<OrderDrink>() { new OrderDrink("Coca-Cola", 2) }}
+                new Order{Id = 101, TableId = "2", ReservationId = 101, Note = "blabla", Time = "21:00", Active = false, OrderDrinks = new List<OrderDrink>() { new OrderDrink("Coca-Cola", 2), new  OrderDrink("Fanta", 1) }}
             };
         }
 
         public List<Order> GetAll()
         {
-            return objOrderList;
+            List<Order> list = new List<Order>();
+            foreach(Order order in objOrderList)
+            {
+                if(order.Active)
+                {
+                    list.Add(order);
+                }
+            }
+            return list;
+        }
+
+        public List<OrderDrink> GetOrderDrinks(int Id)
+        {
+            for (int index = 0; index < objOrderList.Count; index++)
+            {
+                if (objOrderList[index].Id == Id)
+                {
+                    return objOrderList[index].OrderDrinks;
+                }
+            }
+            //return new List<OrderDrink>();
+            return null;
         }
 
         public bool Add(Order objNewOrder)
