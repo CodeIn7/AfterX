@@ -48,6 +48,10 @@ namespace AfterX_desktop.ViewModels
             ChangeViewModel(PageViewModels[1]);
         }
 
+        private void seeOrders(object obj)
+        {
+            ChangeViewModel(PageViewModels[2]);
+        }
 
         public MainWindowViewModel()
         {
@@ -55,9 +59,10 @@ namespace AfterX_desktop.ViewModels
             PageViewModels.Add(new ReservationViewModel());
             PageViewModels.Add(new OrderViewModel());
 
-            CurrentPageViewModel = PageViewModels[2];
+            CurrentPageViewModel = PageViewModels[0];
 
             Mediator.Subscribe("seeReservations", seeReservations);
+            Mediator.Subscribe("seeOrders", seeOrders);
         }
     }
 }
