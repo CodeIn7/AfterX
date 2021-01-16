@@ -51,8 +51,10 @@
                 <DataGridTextColumn Header="Datum"
                                     Width="auto"
                                     Binding="{Binding Path=ReservationDate}"/>
+   
             </DataGrid.Columns>
         </DataGrid>
+       
 
     </Grid>
 </UserControl>

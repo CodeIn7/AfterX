@@ -55,7 +55,7 @@ namespace AfterX_desktop.ViewModels
             PageViewModels.Add(new ReservationViewModel());
             PageViewModels.Add(new OrderViewModel());
 
-            CurrentPageViewModel = PageViewModels[0];
+            CurrentPageViewModel = PageViewModels[2];
 
             Mediator.Subscribe("seeReservations", seeReservations);
         }

@@ -29,7 +29,21 @@ namespace AfterX_desktop.ViewModels
             ObjOrderService = new OrderService();
             LoadData();
             currentOrder = new Order();
+            showDrinksCommand = new RelayCommand(ShowDrinks);
 
+        }
+
+        private RelayCommand showDrinksCommand;
+
+        public RelayCommand ShowDrinksCommand
+        {
+            get { return showDrinksCommand; }
+        }
+
+        public void ShowDrinks()
+        {
+            Mediator.Notify("seeReservations", "");
+            Console.WriteLine("drinks");
         }
 
         #region DisplayOperation
