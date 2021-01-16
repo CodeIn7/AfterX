@@ -16,6 +16,13 @@ namespace AfterX_desktop.Models
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public OrderDrink(string v1, int v2)
+        {
+            this.drink = v1;
+            this.noBottles = v2;
+        }
+
         private String drink;
 
         public String Drink
@@ -25,14 +32,6 @@ namespace AfterX_desktop.Models
         }
 
         private int noBottles;
-        private string v1;
-        private int v2;
-
-        public OrderDrink(string v1, int v2)
-        {
-            this.v1 = v1;
-            this.v2 = v2;
-        }
 
         public int NoBottles
         {

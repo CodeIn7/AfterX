@@ -16,7 +16,6 @@ namespace AfterX_desktop.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
         private int id;
-
         public int Id
         {
             get { return id; }

@@ -8,31 +8,56 @@ using System.Threading.Tasks;
 using AfterX_desktop.Models;
 using AfterX_desktop.Commands;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace AfterX_desktop.ViewModels
 {
     class OrderViewModel : BaseViewModel, IPageViewModel
     {
-        /*#region INotifyPropertyChanged_Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion*/
 
         OrderService ObjOrderService;
         public OrderViewModel()
         {
             ObjOrderService = new OrderService();
             LoadData();
-            currentOrder = new Order();
-
+            getOrderDrinksCommand = new RelayCommand<int>(GetOrderDrinks, null);
         }
 
-        #region DisplayOperation
+        private ICommand getOrderDrinksCommand;
+
+        public ICommand GetOrderDrinksCommand
+        {
+            get { return getOrderDrinksCommand; }
+        }
+
+        private List<OrderDrink> currentOrderDrinks;
+
+        public List<OrderDrink> CurrentOrderDrinks
+        {
+            get { return currentOrderDrinks; }
+            set { currentOrderDrinks = value; OnPropertyChanged("CurrentOrderDrinks"); }
+        }
+
+        public void GetOrderDrinks(int Id)
+        {
+            try
+            {
+                var ObjOrderDrinks = ObjOrderService.GetOrderDrinks(103);
+                if (ObjOrderDrinks != null)
+                {
+                    CurrentOrderDrinks = ObjOrderDrinks;
+                }
+                else
+                {
+                    Message = "Order Drinks not found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Message = "Error";
+            }
+        }
+
         private ObservableCollection<Order> ordersList;
 
         public ObservableCollection<Order> OrdersList
@@ -44,15 +69,6 @@ namespace AfterX_desktop.ViewModels
         {
             OrdersList = new ObservableCollection<Order>(ObjOrderService.GetAll());
         }
-        #endregion
-
-        private Order currentOrder;
-
-        public Order CurrentOrder
-        {
-            get { return currentOrder; }
-            set { currentOrder = value; OnPropertyChanged("CurrentOrder"); }
-        }
 
         private string message;
 
@@ -61,41 +77,5 @@ namespace AfterX_desktop.ViewModels
             get { return message; }
             set { message = value; OnPropertyChanged("Message"); }
         }
-
-        #region SearchOperation
-        private RelayCommand searchCommand;
-
-        public RelayCommand SearchCommand
-        {
-            get { return searchCommand; }
-        }
-
-        public void Search()
-        {
-            try
-            {
-                var ObjOrder = ObjOrderService.Search(CurrentOrder.Id);
-                if (ObjOrder != null)
-                {
-                    CurrentOrder.TableId = ObjOrder.TableId;
-                    CurrentOrder.ReservationId = ObjOrder.ReservationId;
-                    CurrentOrder.Note = ObjOrder.Note;
-                    CurrentOrder.Time = ObjOrder.Time;
-                    CurrentOrder.Active = ObjOrder.Active;
-                    CurrentOrder.OrderDrinks = ObjOrder.OrderDrinks;
-
-                }
-                else
-                {
-                    Message = "Order not found";
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-        #endregion
     }
 }
-
