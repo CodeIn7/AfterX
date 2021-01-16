@@ -12,7 +12,7 @@
     <Grid Margin="15" DataContext="{Binding Source={StaticResource orderViewModel}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -31,10 +31,26 @@
                    FontSize="20"
                    FontWeight="Bold"
                    HorizontalAlignment="Center" Padding="3"/>
+        <Grid Grid.Row="1">
+            <Grid Grid.Row="0" Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="Label" Width="auto"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="auto" />
+
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Pretraži po rezervaciji:"/>
+                <TextBox x:Name="ReservationId" Grid.Column="1" Margin="20 0 0 0" Text="{Binding Path=SelectedId}"/>
+                <Button Grid.Column="3" Command="{Binding Path=SearchCommand,  Source={StaticResource orderViewModel}}" HorizontalAlignment="Center">Pretraži</Button>
+            </Grid>
+        </Grid>
+        
         <DataGrid Name="dgOrders"
                     AutoGenerateColumns="False"
-                    Grid.Row="1"
-                    Grid.Column="1" Padding="3" Margin="5,8"
+                    Grid.Row="2"
+                    Grid.Column="0" Padding="3" Margin="5,8"
                     IsReadOnly="True"
                     ItemsSource="{Binding Path=OrdersList, Mode=TwoWay}">
             <DataGrid.Columns>
@@ -73,7 +89,7 @@
                 <DataGridTemplateColumn>
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Name="btnEnd" FontSize="5" Background="White" Command="{Binding Path=EndOrderCommand, Source={StaticResource orderViewModel}}"
+                        <Button Name="btnEnd" FontSize="12" Background="White" Command="{Binding Path=EndOrderCommand, Source={StaticResource orderViewModel}}"
                                 CommandParameter="{Binding Path=Id}">
                                 <TextBlock Margin="0 -4 0 0">Završi</TextBlock>
                         </Button>
@@ -84,8 +100,8 @@
         </DataGrid>
         <DataGrid Name="dgOrdersDrinks"
                     AutoGenerateColumns="False"
-                    Grid.Row="2"
-                    Grid.Column="1" Padding="3" Margin="5,8"
+                    Grid.Row="3"
+                    Grid.Column="0" Padding="3" Margin="5,8"
                     Visibility="Visible"
                     IsReadOnly="True"
                     ItemsSource="{Binding Path=CurrentOrderDrinks, Mode=TwoWay}">
