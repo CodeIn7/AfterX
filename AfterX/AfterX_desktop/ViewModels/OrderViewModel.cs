@@ -21,15 +21,10 @@ namespace AfterX_desktop.ViewModels
             ObjOrderService = new OrderService();
             LoadData();
             getOrderDrinksCommand = new RelayCommand<int>(GetOrderDrinks, null);
+            endOrderCommand = new RelayCommand<int>(EndOrder, null);
         }
 
-        private ICommand getOrderDrinksCommand;
-
-        public ICommand GetOrderDrinksCommand
-        {
-            get { return getOrderDrinksCommand; }
-        }
-
+        
         private List<OrderDrink> currentOrderDrinks;
 
         public List<OrderDrink> CurrentOrderDrinks
@@ -38,14 +33,27 @@ namespace AfterX_desktop.ViewModels
             set { currentOrderDrinks = value; OnPropertyChanged("CurrentOrderDrinks"); }
         }
 
+
+        private ICommand getOrderDrinksCommand;
+
+        public ICommand GetOrderDrinksCommand
+        {
+            get { return getOrderDrinksCommand; }
+        }
+
+
+
+
+        private int currentOrder;
         public void GetOrderDrinks(int Id)
         {
             try
             {
-                var ObjOrderDrinks = ObjOrderService.GetOrderDrinks(103);
+                var ObjOrderDrinks = ObjOrderService.GetOrderDrinks(Id);
                 if (ObjOrderDrinks != null)
                 {
                     CurrentOrderDrinks = ObjOrderDrinks;
+                    currentOrder = Id;
                 }
                 else
                 {
@@ -77,5 +85,43 @@ namespace AfterX_desktop.ViewModels
             get { return message; }
             set { message = value; OnPropertyChanged("Message"); }
         }
+
+        private ICommand endOrderCommand;
+
+        public ICommand EndOrderCommand
+        {
+            get { return endOrderCommand; }
+        }
+
+        public void EndOrder(int Id)
+        {
+            try
+            {
+                if (ObjOrderService.End(Id))
+                {   
+                    if(currentOrder == Id)
+                    {
+                        CurrentOrderDrinks = null;
+                    }
+                    LoadData();
+                    
+                }
+               
+               
+                else
+                {
+                    Message = "Order Drinks not found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Message = "Error";
+            }
+        }
+
+
     }
+
+        
+            
 }

@@ -70,13 +70,23 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Name="btnEnd" FontSize="5" Background="White" Command="{Binding Path=EndOrderCommand, Source={StaticResource orderViewModel}}"
+                                CommandParameter="{Binding Path=Id}">
+                                <TextBlock Margin="0 -4 0 0">Završi</TextBlock>
+                        </Button>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid Name="dgOrdersDrinks"
                     AutoGenerateColumns="False"
                     Grid.Row="2"
                     Grid.Column="1" Padding="3" Margin="5,8"
-                    Visibility="Collapsed"
+                    Visibility="Visible"
                     IsReadOnly="True"
                     ItemsSource="{Binding Path=CurrentOrderDrinks, Mode=TwoWay}">
             <DataGrid.Columns>

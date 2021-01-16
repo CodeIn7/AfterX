@@ -17,7 +17,7 @@ namespace AfterX_desktop.Models
             objOrderList = new List<Order>()
             {
                 new Order{Id = 100, TableId = "1", ReservationId = 101, Note = "blabla", Time = "22:00", Active = true, OrderDrinks = new List<OrderDrink>() { new OrderDrink("Coca-Cola", 2) } },
-                new Order{Id = 101, TableId = "2", ReservationId = 101, Note = "blabla", Time = "21:00", Active = false, OrderDrinks = new List<OrderDrink>() { new OrderDrink("Coca-Cola", 2), new  OrderDrink("Fanta", 1) }}
+                new Order{Id = 101, TableId = "2", ReservationId = 101, Note = "blabla", Time = "21:00", Active = true, OrderDrinks = new List<OrderDrink>() { new OrderDrink("Coca-Cola", 2), new  OrderDrink("Fanta", 1) }}
             };
         }
 
@@ -50,6 +50,19 @@ namespace AfterX_desktop.Models
         public bool Add(Order objNewOrder)
         {
             objOrderList.Add(objNewOrder);
+            return true;
+        }
+
+        public bool End(int id)
+        {
+            for(int index = 0; index < objOrderList.Count; index++)
+            {
+                if(objOrderList[index].Id == id)
+                {
+                    objOrderList[index].Active = false;
+                }
+            }
+
             return true;
         }
 
