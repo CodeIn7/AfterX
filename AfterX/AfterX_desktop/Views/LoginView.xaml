@@ -12,12 +12,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <!--<TextBlock Grid.Row="0" FontSize="48" Text="AfterX" HorizontalAlignment="Center"/>-->
-            <Image Source="/Images/AfterX.png" Grid.Row="0" Width="50"/>
+            <Image Source="/Images/AfterX.png" Grid.Row="0" Width="100"/>
+            <TextBlock Grid.Row="1" FontSize="24" Text="Prijava" HorizontalAlignment="Center"/>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -46,7 +48,7 @@
                 </Grid>
 
                 <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center"
-Content="Login" Command="{Binding LoginCommand}" Margin="0 20"/>
+                        Content="Login" Command="{Binding LoginCommand}" Margin="0 20" BorderBrush="Black"/>
             </Grid>
         </Grid>
     </Border>

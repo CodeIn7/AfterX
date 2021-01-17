@@ -47,5 +47,7 @@ namespace AfterX_desktop.Models
             set { reservationDate = value; OnPropertyChanged("ReservationDate"); }
         }
 
+
+
     }
 }

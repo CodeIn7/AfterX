@@ -13,7 +13,7 @@ namespace AfterX_desktop.ViewModels
 {
     public class ReservationViewModel : BaseViewModel, IPageViewModel
     {
-        #region INotifyPropertyChanged_Implementation
+        /*#region INotifyPropertyChanged_Implementation
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
@@ -21,7 +21,7 @@ namespace AfterX_desktop.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
+        #endregion*/
 
         ReservationService ObjReservationService;
         public ReservationViewModel()
@@ -62,7 +62,7 @@ namespace AfterX_desktop.ViewModels
             set { message = value; OnPropertyChanged("Message"); }
         }
 
-        #region SearchOperation
+        /*#region SearchOperation
         private RelayCommand searchCommand;
 
         public RelayCommand SearchCommand
@@ -91,6 +91,6 @@ namespace AfterX_desktop.ViewModels
 
             }
         }
-        #endregion
+        #endregion*/
     }
 }

@@ -12,20 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AfterX_desktop.Commands;
 
-using AfterX_desktop.ViewModels;
-namespace AfterX_desktop
+namespace AfterX_desktop.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HeaderView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HeaderView : UserControl
     {
-       
-        public MainWindow()
+        public HeaderView()
         {
             InitializeComponent();
+        }
 
+        private void Reservations_Click(object sender, RoutedEventArgs e)
+        {
+            Mediator.Notify("seeReservations", "");
+        }
+
+        private void Orders_Click(object sender, RoutedEventArgs e)
+        {
+            Mediator.Notify("seeOrders", "");
         }
     }
 }
