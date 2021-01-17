@@ -73,7 +73,7 @@ namespace AfterX.Controllers.V1
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Update([FromRoute] int roleId, [FromBody] UpdateRoleRequest request)
         {
-            var role = new Role { Id = roleId, Name = request.Name };
+            var role = new Role { Id = roleId, Name = request.Name, NormalizedName = request.Name.ToUpper()};
 
             var updated = await _roleService.UpdateRoleAsync(role);
 

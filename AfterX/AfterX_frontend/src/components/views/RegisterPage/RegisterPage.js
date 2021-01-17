@@ -5,7 +5,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import 'antd/dist/antd.css';
 import { Form, Input, Button, Radio, DatePicker } from 'antd';
-import { registerUser } from '../../../_actions/user_actions';
 import axios from '../../../axios';
 
 const formItemLayout = {

@@ -48,11 +48,11 @@ namespace AfterX_backend.Services.ServiceImplementations
 
         }
 
-        public async Task<bool> UpdateRoleAsync(Role cityToUpdate)
+        public async Task<bool> UpdateRoleAsync(Role roleToUpdate)
         {
-            _dataContext.Update(cityToUpdate);
-            var created = await _dataContext.SaveChangesAsync();
-            return created > 0;
+            _dataContext.Update(roleToUpdate);
+            var updated = await _dataContext.SaveChangesAsync();
+            return updated > 0;
         }
     }
 }

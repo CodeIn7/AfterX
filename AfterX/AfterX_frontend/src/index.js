@@ -6,18 +6,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { createBrowserHistory } from 'history';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import store from './store';
+
+const history = createBrowserHistory();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
+  <BrowserRouter history={history}>
+    <App />
+  </BrowserRouter>,
   document.getElementById('root')
 );
-
 serviceWorker.unregister();

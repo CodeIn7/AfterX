@@ -11,23 +11,30 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace AfterX_backend.Services.ServiceImplementations
 {
     public class IdentityService : IIdentityService
     {
         private readonly UserManager<User> _userManager;
+        private readonly DataContext _dataContext;
         private readonly JwtSettings _jwtSettings;
-        public IdentityService(UserManager<User> userManager, JwtSettings jwtSetting)
+        public IdentityService(UserManager<User> userManager, JwtSettings jwtSetting, DataContext dataContext)
         {
             _userManager = userManager;
             _jwtSettings = jwtSetting;
+            _dataContext = dataContext;
         }
 
         public async Task<AuthenticationResult> LoginAsync(string email, string password)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-
+            var user = await _dataContext.Users
+                .FirstOrDefaultAsync(m => m.Email == email);//await _userManager.FindByEmailAsync(email);
+            var userattribues = await _dataContext.Userattribues
+                .FirstOrDefaultAsync(m => m.Userid == user.Id);//await _userManager.FindByEmailAsync(email);
+            user.Userattribue = userattribues;
             if (user == null)
                 return new AuthenticationResult
                 {
@@ -46,22 +53,15 @@ namespace AfterX_backend.Services.ServiceImplementations
             return GenerateAuthenticationResultForUser(user);
         }
 
-        public async Task<AuthenticationResult> RegisterAsync(string email, string password, string firstName, string lastName)
+        public async Task<AuthenticationResult> RegisterAsync(User newUser,string password, int roleId)
         {
-            var existingUser = await _userManager.FindByEmailAsync(email);
+            var existingUser = await _userManager.FindByEmailAsync(newUser.Email);
 
             if (existingUser != null) return new AuthenticationResult
             {
                 Errors = new[] { "User with this email already exists" }
             };
-            //var newUserId = Guid.NewGuid();
-            var newUser = new User
-            {
-                //Id = newUserId.ToString(),
-                Email = email,
-                UserName = email,
-                //Password = password    
-            };
+
 
             var createdUser = await _userManager.CreateAsync(newUser, password);
 
@@ -72,6 +72,9 @@ namespace AfterX_backend.Services.ServiceImplementations
                     Errors = createdUser.Errors.Select(x => x.Description)
                 };
             }
+            var role = await _dataContext.Roles
+                .FirstOrDefaultAsync(m => m.Id == roleId);
+            await _userManager.AddToRoleAsync(newUser, role.NormalizedName);
 
             return GenerateAuthenticationResultForUser(newUser);
 
@@ -90,7 +93,10 @@ namespace AfterX_backend.Services.ServiceImplementations
                     new Claim(JwtRegisteredClaimNames.Sub, newUser.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, newUser.Email),
-                    new Claim("id", newUser.Id.ToString())
+                    new Claim("id", newUser.Id.ToString()),
+                    new Claim("Firstname", newUser.Userattribue.Firstname),
+                    new Claim("Lastname", newUser.Userattribue.Lastname)
+
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

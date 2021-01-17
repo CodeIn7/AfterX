@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AfterX;
 
 namespace AfterX_backend.Controllers.V1
 {
@@ -22,7 +23,23 @@ namespace AfterX_backend.Controllers.V1
         [HttpPost(ApiRoutes.Identity.Register)]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest registrationRequest)
         {
-            var authResponse = await _identityService.RegisterAsync(registrationRequest.Email, registrationRequest.Password, registrationRequest.FirstName, registrationRequest.LastName);
+            Userattribue userattribue = new Userattribue
+            {
+                Firstname = registrationRequest.Firstname,
+                Lastname = registrationRequest.Lastname,
+                Gender = registrationRequest.Gender,
+                Yearofbirth = registrationRequest.Yearofbirth,
+                Telephone = registrationRequest.Telephone,
+                
+
+            };
+            User user = new User
+            {
+                UserName = registrationRequest.Email, 
+                Email = registrationRequest.Email,
+                Userattribue = userattribue,
+            };
+            var authResponse = await _identityService.RegisterAsync(user, registrationRequest.Password, registrationRequest.RoleId);
 
             if (!authResponse.Success)
             {

@@ -25,6 +25,7 @@ namespace EciTimeSheetWebApi.Installers
                     configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<Role>()
                 .AddEntityFrameworkStores<DataContext>();
 
             //services.AddDefaultIdentity<User>()
