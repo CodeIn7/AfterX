@@ -17,15 +17,12 @@ namespace AfterX_desktop.ViewModels
 {
     class LoginViewModel : BaseViewModel, IPageViewModel
     {
-        private UserLoginRequest userLoginRequest;
-        IdentityController identityController;
-
+        private string token;
 
         public LoginViewModel()
         {
             loginCommand = new RelayCommand<object>(Login);
-            userLoginRequest = new UserLoginRequest();
-            string token = null;
+            token = null;
         }
 
         private string email;
@@ -40,16 +37,14 @@ namespace AfterX_desktop.ViewModels
 
         public ICommand LoginCommand
         {
-            get{ return loginCommand;}
+            get{ return loginCommand; }
         }
 
         public async void Login(object passwordBoxInput)
         {
             var passwordBox = passwordBoxInput as PasswordBox;
-            userLoginRequest.Email = email;
-            userLoginRequest.Password = passwordBox.Password;
-            IActionResult actionResult = await identityController.Login(userLoginRequest);
-            Console.WriteLine(actionResult.ToString());
+            string res = await RestHelper.Login(Email, passwordBox.Password);
+            token = res.Split("\"")[3];
             Mediator.Notify("seeReservations", "");
         }
     }
