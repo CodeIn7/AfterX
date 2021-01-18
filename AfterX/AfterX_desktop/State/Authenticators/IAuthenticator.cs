@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace AfterX_desktop.State
 {
     public interface IAuthenticator
-    {
+    {   
+        static Authenticator Instance { get; }
         string Token { get; }
         bool IsLoggedIn { get; }
-
-        event Action StateChanged;
 
         Task Login(string username, string password);
 

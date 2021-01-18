@@ -10,6 +10,7 @@ using AfterX_desktop.Commands;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using AfterX_backend.Services.ServiceImplementations;
+using AfterX_desktop.State;
 
 namespace AfterX_desktop.ViewModels
 {
@@ -66,6 +67,7 @@ namespace AfterX_desktop.ViewModels
             currentOrderDrinks = null;
             ButtonText = "Add";
             ButtonClickCommand = GetOrderDrinksCommand;
+
         }
 
         private List<OrderDrink> currentOrderDrinks;
@@ -87,6 +89,7 @@ namespace AfterX_desktop.ViewModels
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine(Authenticator.Instance.Token);
                 ButtonText = "Save";
                 ButtonClickCommand = HideOrderDrinksCommand;
                 var ObjOrderDrinks = ObjOrderService.GetOrderDrinks(Id);

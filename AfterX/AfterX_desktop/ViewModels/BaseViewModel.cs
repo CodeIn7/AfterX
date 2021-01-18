@@ -13,13 +13,6 @@ namespace AfterX_desktop.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private Authenticator authenticator = new Authenticator();
-
-        public Authenticator Authenticator
-        {
-            get { return authenticator.Instance; }
-        }
-
         protected void OnPropertyChanged(string propertyName)
         {
             VerifyPropertyName(propertyName);
