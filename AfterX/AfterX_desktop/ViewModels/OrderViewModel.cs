@@ -26,11 +26,48 @@ namespace AfterX_desktop.ViewModels
             getOrderDrinksCommand = new RelayCommand<int>(GetOrderDrinks, null);
             //searchCommand = new RelayCommand<int>(Search, null);
             searchCommand = new RelayCommand(Search);
-
+            hideOrderDrinksCommand = new RelayCommand(HideOrderDrinks);
             endOrderCommand = new RelayCommand<int>(EndOrder, null);
         }
 
-        #region OrderDrinksDetail
+        #region DrinkButtonHandler
+        private string buttonText;
+
+        public string ButtonText
+        {
+            get { return buttonText ?? (buttonText = "Add"); }
+            set
+            {
+                buttonText = value;
+                OnPropertyChanged("ButtonText");
+            }
+        }
+
+        private ICommand buttonClickCommand;
+        public ICommand ButtonClickCommand
+        {
+            get { return buttonClickCommand ?? (buttonClickCommand = getOrderDrinksCommand); }
+            set
+            {
+                buttonClickCommand = value;
+                OnPropertyChanged("ButtonClickCommand");
+            }
+        }
+
+        private ICommand hideOrderDrinksCommand;
+
+        public ICommand HideOrderDrinksCommand
+        {
+            get { return getOrderDrinksCommand; }
+        }
+
+        private void HideOrderDrinks()
+        {
+            currentOrderDrinks = null;
+            ButtonText = "Add";
+            ButtonClickCommand = GetOrderDrinksCommand;
+        }
+
         private List<OrderDrink> currentOrderDrinks;
 
         public List<OrderDrink> CurrentOrderDrinks
@@ -50,6 +87,8 @@ namespace AfterX_desktop.ViewModels
         {
             try
             {
+                ButtonText = "Save";
+                ButtonClickCommand = HideOrderDrinksCommand;
                 var ObjOrderDrinks = ObjOrderService.GetOrderDrinks(Id);
                 if (ObjOrderDrinks != null)
                 {

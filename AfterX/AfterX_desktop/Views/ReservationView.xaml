@@ -8,10 +8,6 @@
              xmlns:controls="clr-namespace:AfterX_desktop.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    <UserControl.Resources>
-        <models:Order x:Key="Orders"/>
-    </UserControl.Resources>
     <ScrollViewer>
         <Grid Margin="15">
             <Grid.ColumnDefinitions>

@@ -47,7 +47,7 @@
 
                 </Grid>
 
-                <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center"
+                <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" x:Name="LogIn"
                         Content="Login" Command="{Binding LoginCommand}" Margin="0 20" BorderBrush="Black"/>
             </Grid>
         </Grid>

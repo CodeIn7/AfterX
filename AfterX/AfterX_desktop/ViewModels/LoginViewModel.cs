@@ -15,6 +15,23 @@ namespace AfterX_desktop.ViewModels
         {
             loginCommand = new RelayCommand(Login);
         }
+
+        private string userName;
+
+        public string UserName
+        {
+            get { return userName; }
+            set { userName = value; OnPropertyChanged("UserName"); }
+        }
+
+        private string password;
+
+        public string Password
+        {
+            get { return password; }
+            set { password = value; OnPropertyChanged("Password"); }
+        }
+
         private RelayCommand loginCommand;
 
         public RelayCommand LoginCommand
