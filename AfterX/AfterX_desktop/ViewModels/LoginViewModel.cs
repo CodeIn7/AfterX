@@ -43,9 +43,11 @@ namespace AfterX_desktop.ViewModels
         public async void Login(object passwordBoxInput)
         {
             var passwordBox = passwordBoxInput as PasswordBox;
-            string res = await RestHelper.Login(Email, passwordBox.Password);
-            token = res.Split("\"")[3];
-            Mediator.Notify("seeReservations", "");
+            await Authenticator.Login(Email, passwordBox.Password);
+            if (Authenticator.IsLoggedIn) {
+                Mediator.Notify("seeReservations", "");
+            }
+            
         }
     }
 }

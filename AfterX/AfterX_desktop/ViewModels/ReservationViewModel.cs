@@ -42,6 +42,8 @@ namespace AfterX_desktop.ViewModels
         }
         private void LoadData()
         {
+            string token = Authenticator.Instance.Token;
+            Console.WriteLine(token);
             ReservationsList = new ObservableCollection<Reservation>(ObjReservationService.GetAll());
         }
         #endregion

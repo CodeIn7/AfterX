@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AfterX_desktop.State;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -11,6 +12,13 @@ namespace AfterX_desktop.ViewModels
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private Authenticator authenticator = new Authenticator();
+
+        public Authenticator Authenticator
+        {
+            get { return authenticator.Instance; }
+        }
 
         protected void OnPropertyChanged(string propertyName)
         {
