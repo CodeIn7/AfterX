@@ -7,56 +7,44 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using AfterX_backend.Contracts.V1.Requests;
-using AfterX_backend.Contracts.V1.Responses;
 using AfterX_backend.Controllers.V1;
 using AfterX_desktop.Helper;
 using Microsoft.AspNetCore.Mvc;
+
+using System.Windows.Controls;
 
 namespace AfterX_desktop.ViewModels
 {
     class LoginViewModel : BaseViewModel, IPageViewModel
     {
-        private UserLoginRequest userLoginRequest;
-        IdentityController identityController;
-
+        private string token;
 
         public LoginViewModel()
         {
-            loginCommand = new RelayCommand(Login);
-            userLoginRequest = new UserLoginRequest();
+            loginCommand = new RelayCommand<object>(Login);
+            token = null;
         }
 
-        private string userName;
+        private string email;
 
-        public string UserName
+        public string Email
         {
-            get { return userName; }
-            set { userName = value; OnPropertyChanged("UserName"); }
+            get { return email; }
+            set { email = value; OnPropertyChanged("Email"); }
         }
 
-        private string password;
+        private ICommand loginCommand;
 
-        public string Password
+        public ICommand LoginCommand
         {
-            get { return password; }
-            set { password = value; OnPropertyChanged("Password"); }
+            get{ return loginCommand; }
         }
 
-        private RelayCommand loginCommand;
-
-        public RelayCommand LoginCommand
+        public async void Login(object passwordBoxInput)
         {
-            get{ return loginCommand;}
-        }
-
-        public async void Login()
-        { 
-
-            string res = await RestHelper.Login(userName,Password);
-
-            Console.WriteLine(res);
-  
-            //string Token = loginResult;
+            var passwordBox = passwordBoxInput as PasswordBox;
+            string res = await RestHelper.Login(Email, passwordBox.Password);
+            token = res.Split("\"")[3];
             Mediator.Notify("seeReservations", "");
         }
     }
