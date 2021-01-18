@@ -25,7 +25,6 @@ namespace AfterX_desktop.ViewModels
             ObjOrderService = new OrderService();
             LoadData();
             getOrderDrinksCommand = new RelayCommand<int>(GetOrderDrinks, null);
-            //searchCommand = new RelayCommand<int>(Search, null);
             searchCommand = new RelayCommand(Search);
             hideOrderDrinksCommand = new RelayCommand(HideOrderDrinks);
             endOrderCommand = new RelayCommand<int>(EndOrder, null);
@@ -89,7 +88,6 @@ namespace AfterX_desktop.ViewModels
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine(Authenticator.Instance.Token);
                 ButtonText = "Save";
                 ButtonClickCommand = HideOrderDrinksCommand;
                 var ObjOrderDrinks = ObjOrderService.GetOrderDrinks(Id);

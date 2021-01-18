@@ -45,9 +45,9 @@ namespace AfterX_desktop.State
         public async Task Login(string username, string password)
         {   
             string res = await RestHelper.Login(username, password);
-            //if(!(res == string.Empty))
-                token = res.Split("\"")[3];
-           
+            
+            if (!res.Equals("{\"errors\":[\"Username/password don't match\"]}"))
+                token = res.Split("\"")[3];      
         }
 
         public void Logout()

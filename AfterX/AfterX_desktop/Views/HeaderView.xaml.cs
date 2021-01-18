@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AfterX_desktop.Commands;
+using AfterX_desktop.State;
 
 namespace AfterX_desktop.Views
 {
@@ -34,6 +35,12 @@ namespace AfterX_desktop.Views
         private void Orders_Click(object sender, RoutedEventArgs e)
         {
             Mediator.Notify("seeOrders", "");
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            Authenticator.Instance.Logout();
+            Mediator.Notify("logout", "");
         }
     }
 }

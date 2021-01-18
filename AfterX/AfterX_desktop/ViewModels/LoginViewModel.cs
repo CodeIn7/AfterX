@@ -41,12 +41,24 @@ namespace AfterX_desktop.ViewModels
             get{ return loginCommand; }
         }
 
+        private string loginText = "";
+
+        public string LoginText
+        {
+            get { return loginText; }
+            set { loginText = value; }
+        }
+
         public async void Login(object passwordBoxInput)
         {
             var passwordBox = passwordBoxInput as PasswordBox;
             await Authenticator.Instance.Login(Email, passwordBox.Password);
             if (Authenticator.Instance.IsLoggedIn) {
                 Mediator.Notify("seeReservations", "");
+            }
+            else
+            {
+                loginText = "Neispravan email ili lozinka.";
             }
             
         }

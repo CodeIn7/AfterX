@@ -53,6 +53,10 @@ namespace AfterX_desktop.ViewModels
             ChangeViewModel(PageViewModels[2]);
         }
 
+        private void logout(object obj)
+        {
+            ChangeViewModel(PageViewModels[0]);
+        }
         public MainWindowViewModel()
         {
             PageViewModels.Add(new LoginViewModel());
@@ -63,6 +67,7 @@ namespace AfterX_desktop.ViewModels
 
             Mediator.Subscribe("seeReservations", seeReservations);
             Mediator.Subscribe("seeOrders", seeOrders);
+            Mediator.Subscribe("logout", logout);
         }
     }
 }
