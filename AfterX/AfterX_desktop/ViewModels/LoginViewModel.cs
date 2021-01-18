@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using AfterX_backend.Contracts.V1.Requests;
-using AfterX_backend.Contracts.V1.Responses;
 using AfterX_backend.Controllers.V1;
 using Microsoft.AspNetCore.Mvc;
+
+using System.Windows.Controls;
 
 namespace AfterX_desktop.ViewModels
 {
@@ -21,40 +22,33 @@ namespace AfterX_desktop.ViewModels
 
         public LoginViewModel()
         {
-            loginCommand = new RelayCommand(Login);
+            loginCommand = new RelayCommand<object>(Login);
             userLoginRequest = new UserLoginRequest();
+            string token = null;
         }
 
-        private string userName;
+        private string email;
 
-        public string UserName
+        public string Email
         {
-            get { return userName; }
-            set { userName = value; OnPropertyChanged("UserName"); }
+            get { return email; }
+            set { email = value; OnPropertyChanged("Email"); }
         }
 
-        private string password;
+        private ICommand loginCommand;
 
-        public string Password
-        {
-            get { return password; }
-            set { password = value; OnPropertyChanged("Password"); }
-        }
-
-        private RelayCommand loginCommand;
-
-        public RelayCommand LoginCommand
+        public ICommand LoginCommand
         {
             get{ return loginCommand;}
         }
 
-        public async void Login()
+        public async void Login(object passwordBoxInput)
         {
-            userLoginRequest.Email = userName;
-            userLoginRequest.Password = "Admin123!";//Password;
+            var passwordBox = passwordBoxInput as PasswordBox;
+            userLoginRequest.Email = email;
+            userLoginRequest.Password = passwordBox.Password;
             IActionResult actionResult = await identityController.Login(userLoginRequest);
             Console.WriteLine(actionResult.ToString());
-            //string Token = loginResult;
             Mediator.Notify("seeReservations", "");
         }
     }
