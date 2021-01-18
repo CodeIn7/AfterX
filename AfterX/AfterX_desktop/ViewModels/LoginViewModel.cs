@@ -9,6 +9,7 @@ using System.Windows.Input;
 using AfterX_backend.Contracts.V1.Requests;
 using AfterX_backend.Contracts.V1.Responses;
 using AfterX_backend.Controllers.V1;
+using AfterX_desktop.Helper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AfterX_desktop.ViewModels
@@ -49,11 +50,12 @@ namespace AfterX_desktop.ViewModels
         }
 
         public async void Login()
-        {
-            userLoginRequest.Email = userName;
-            userLoginRequest.Password = "Admin123!";//Password;
-            IActionResult actionResult = await identityController.Login(userLoginRequest);
-            Console.WriteLine(actionResult.ToString());
+        { 
+
+            string res = await RestHelper.Login(userName,Password);
+
+            Console.WriteLine(res);
+  
             //string Token = loginResult;
             Mediator.Notify("seeReservations", "");
         }
