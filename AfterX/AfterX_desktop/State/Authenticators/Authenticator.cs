@@ -7,44 +7,47 @@ using System.Threading.Tasks;
 
 namespace AfterX_desktop.State
 {
-    public class Authenticator : IAuthenticator
+    public sealed class Authenticator : IAuthenticator
     {
-       
 
-        private  Authenticator instance;
+        private static Authenticator instance = null;
+        private static readonly object padlock = new object();
 
-        public  Authenticator Instance
+        Authenticator()
         {
-            get {
-                if (instance == null)
-                    instance = new Authenticator();
+
+        }
+        
+
+        public static Authenticator Instance
+        {
+            get
+            {
+                lock (padlock)
+                    if (instance == null)
+                    {
+                        instance = new Authenticator();
+                    }
                 return instance;
             }
         }
-
-        private string token;
+        private string token = null;
         public string Token
         {
             get
             {
                 return token;
             }
-            private set
-            {
-                token = value;
-            }
         }
 
         public bool IsLoggedIn => token != null;
 
-        public event Action StateChanged;
-
         public async Task Login(string username, string password)
         {   
             string res = await RestHelper.Login(username, password);
-            if(!(res == string.Empty))
-                token = res.Split("\"")[3];
-           
+            
+            if (!res.Equals("{\"errors\":[\"Username/password don't match\"]}"))
+                token = res.Split("\"")[3];      
         }
 
         public void Logout()

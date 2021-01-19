@@ -12,6 +12,7 @@ using AfterX_desktop.Helper;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Windows.Controls;
+using AfterX_desktop.State;
 
 namespace AfterX_desktop.ViewModels
 {
@@ -40,12 +41,24 @@ namespace AfterX_desktop.ViewModels
             get{ return loginCommand; }
         }
 
+        private string loginText = "";
+
+        public string LoginText
+        {
+            get { return loginText; }
+            set { loginText = value; }
+        }
+
         public async void Login(object passwordBoxInput)
         {
             var passwordBox = passwordBoxInput as PasswordBox;
-            await Authenticator.Login(Email, passwordBox.Password);
-            if (Authenticator.IsLoggedIn) {
+            await Authenticator.Instance.Login(Email, passwordBox.Password);
+            if (Authenticator.Instance.IsLoggedIn) {
                 Mediator.Notify("seeReservations", "");
+            }
+            else
+            {
+                loginText = "Neispravan email ili lozinka.";
             }
             
         }

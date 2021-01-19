@@ -8,17 +8,18 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel HorizontalAlignment="Left" Margin="20">
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Button Grid.Column="0" Grid.Row="0" Content="Rezervacije" Margin="10 10 10 10" BorderBrush="Black" Click="Reservations_Click"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Narudžbe" Margin="10 10 10 10" BorderBrush="Black" Click="Orders_Click"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Content="Rezervacije" Margin="10 10 10 10" BorderBrush="Black" Click="Reservations_Click"/>
+            <Button Grid.Column="1" Grid.Row="0" Content="Narudžbe" Margin="10 10 10 10" BorderBrush="Black" Click="Orders_Click"/>
+            <Button Grid.Column="2" Grid.Row="0" Content="Odjava" Margin="381,10,0,10" HorizontalAlignment="Left" Click="Logout_Click"/>
         </Grid>
     </StackPanel>
 </UserControl>

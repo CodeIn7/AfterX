@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AfterX_desktop.Models;
 using AfterX_desktop.Commands;
 using System.Collections.ObjectModel;
+using AfterX_desktop.State;
 
 namespace AfterX_desktop.ViewModels
 {
@@ -43,7 +44,7 @@ namespace AfterX_desktop.ViewModels
         private void LoadData()
         {
             string token = Authenticator.Instance.Token;
-            Console.WriteLine(token);
+            System.Diagnostics.Debug.WriteLine("TOKEN", token);
             ReservationsList = new ObservableCollection<Reservation>(ObjReservationService.GetAll());
         }
         #endregion

@@ -10,6 +10,7 @@ using AfterX_desktop.Commands;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using AfterX_backend.Services.ServiceImplementations;
+using AfterX_desktop.State;
 
 namespace AfterX_desktop.ViewModels
 {
@@ -24,7 +25,6 @@ namespace AfterX_desktop.ViewModels
             ObjOrderService = new OrderService();
             LoadData();
             getOrderDrinksCommand = new RelayCommand<int>(GetOrderDrinks, null);
-            //searchCommand = new RelayCommand<int>(Search, null);
             searchCommand = new RelayCommand(Search);
             hideOrderDrinksCommand = new RelayCommand(HideOrderDrinks);
             endOrderCommand = new RelayCommand<int>(EndOrder, null);
@@ -66,6 +66,7 @@ namespace AfterX_desktop.ViewModels
             currentOrderDrinks = null;
             ButtonText = "Add";
             ButtonClickCommand = GetOrderDrinksCommand;
+
         }
 
         private List<OrderDrink> currentOrderDrinks;
