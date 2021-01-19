@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+// import { Form, Input, Button, Checkbox, Typography } from 'antd';
+import { Form, Input, Button, Checkbox, Typography } from 'antd';
 import PropType from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
-import jwt from 'jsonwebtoken';
 import './LoginPage.css';
-import axios from '../../../axios';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {
   currentUserValue,
   login,
@@ -29,7 +29,6 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { history, location } = this.props;
     return (
       <>
         <Formik
@@ -47,19 +46,10 @@ class LoginPage extends Component {
           })}
           onSubmit={({ email, password }, { setStatus, setSubmitting }) => {
             setStatus();
-            login(email, password).then(
-              // (user) => {
-              () => {
-                const { from } = location.state || {
-                  from: { pathname: '/' },
-                };
-                history.push(from);
-              },
-              (error) => {
-                setSubmitting(false);
-                setStatus(error);
-              }
-            );
+            login(email, password, (error) => {
+              setSubmitting(false);
+              setStatus(error);
+            });
           }}
         >
           {(_props) => {
@@ -84,10 +74,7 @@ class LoginPage extends Component {
                     <Input
                       id="email"
                       prefix={
-                        <Icon
-                          type="user"
-                          style={{ color: 'rgba(0,0,0,.25)' }}
-                        />
+                        <UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
                       }
                       placeholder="Enter your email"
                       type="email"
@@ -109,10 +96,7 @@ class LoginPage extends Component {
                     <Input
                       id="password"
                       prefix={
-                        <Icon
-                          type="lock"
-                          style={{ color: 'rgba(0,0,0,.25)' }}
-                        />
+                        <LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
                       }
                       placeholder="Enter your password"
                       type="password"

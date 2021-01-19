@@ -53,7 +53,7 @@ namespace AfterX_backend.Services.ServiceImplementations
             return GenerateAuthenticationResultForUser(user);
         }
 
-        public async Task<AuthenticationResult> RegisterAsync(User newUser,string password, int roleId)
+        public async Task<AuthenticationResult> RegisterAsync(User newUser,string password, string roleName)
         {
             var existingUser = await _userManager.FindByEmailAsync(newUser.Email);
 
@@ -73,7 +73,7 @@ namespace AfterX_backend.Services.ServiceImplementations
                 };
             }
             var role = await _dataContext.Roles
-                .FirstOrDefaultAsync(m => m.Id == roleId);
+                .FirstOrDefaultAsync(m => m.Name.ToUpper() == roleName.ToUpper());
             await _userManager.AddToRoleAsync(newUser, role.NormalizedName);
 
             return GenerateAuthenticationResultForUser(newUser);

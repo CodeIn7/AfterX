@@ -18,7 +18,7 @@ namespace AfterX_backend.Services.ServiceImplementations
         }
         public async Task<List<Drink>> GetDrinksAsync()
         {
-            var list = await _dataContext.Drinks.ToListAsync();
+            var list = await _dataContext.Drinks.IgnoreAutoIncludes().Include(drink=>drink.Drinktype).ToListAsync(); //.Include(x=>x.Drinktype)
 
             return list;
         }
