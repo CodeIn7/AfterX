@@ -45,7 +45,7 @@ class App extends React.Component {
             </div>
           </nav>
         ) : null}
-        <div style={{ paddingTop: '0px', minHeight: 'calc(100vh - 80px)' }}>
+        <div style={{ paddingTop: '0px', minHeight: 'calc(100vh - 80px)', overflowX: 'hidden', overflowY: 'hidden'}}>
           <Switch>
             {/* <Route exact path="/" component={Auth(LandingPage, null)} /> */}
             <Route exact path="/" component={LandingPage} />
@@ -58,7 +58,7 @@ class App extends React.Component {
             {/* <Route exact path="/login" component={Auth(BartenderLogin, null)} /> */}
             <Route exact path="/login" component={BartenderLogin} />
             {/* <Route exact path="/User" component={Auth(UserLandingPage, null)} /> */}
-            <Route exact path="/User" component={UserLandingPage} />
+            <Route exact path="/user" component={UserLandingPage} />
             <Route
               exact
               path="/register"

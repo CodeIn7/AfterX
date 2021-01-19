@@ -22,7 +22,7 @@ const slides = [slide1, slide2, slide3, slide4, slide5];
 class BartenderLogin extends Component {
   render() {
     return (
-      <div className={s.container}>
+      <div style={{overflowX: "hidden", overflowY: "hidden"}} className={s.container}>
         <div className={s.header}>
           <img className="logoImage" src={image} alt="Slika" />
         </div>
