@@ -35,6 +35,23 @@ namespace AfterX.Contracts.V1
             public const string Delete = Base + "/roles/{roleId}";
             public const string Get = Base + "/roles/{roleId}";
         }
+
+        public static class Drinks
+        {
+            public const string GetAll = Base + "/drinks";
+            public const string Create = Base + "/drinks";
+            public const string Update = Base + "/drinks/{drinkId}";
+            public const string Delete = Base + "/drinks/{drinkId}";
+            public const string Get = Base + "/drinks/{drinkId}";
+        }
+        public static class DrinkTypes
+        {
+            public const string GetAll = Base + "/drinkTypes";
+            public const string Create = Base + "/drinkTypes";
+            public const string Update = Base + "/drinkTypes/{drinkTypesId}";
+            public const string Delete = Base + "/drinkTypes/{drinkTypesId}";
+            public const string Get = Base + "/drinkTypes/{drinkTypesId}";
+        }
         public static class Identity
         {
             public const string Register = Base + "/idnetity/register";

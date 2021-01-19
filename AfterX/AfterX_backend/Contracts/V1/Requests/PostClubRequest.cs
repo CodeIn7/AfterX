@@ -14,7 +14,13 @@ namespace AfterX_backend.Controllers.V1
 
         //key=table type id, value = number of tables
         public Dictionary<int, TableRequest> Tables { get; set; }
+        public Dictionary<int, PriceDrink> PriceList { get; set; }
 
+    }
+    public class PriceDrink
+    {
+        public int drinkId { get; set; }
+        public decimal price { get; set; }
     }
     public class TableRequest
     {

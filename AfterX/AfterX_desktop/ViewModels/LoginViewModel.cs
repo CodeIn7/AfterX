@@ -7,55 +7,60 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using AfterX_backend.Contracts.V1.Requests;
-using AfterX_backend.Contracts.V1.Responses;
 using AfterX_backend.Controllers.V1;
+using AfterX_desktop.Helper;
 using Microsoft.AspNetCore.Mvc;
+
+using System.Windows.Controls;
+using AfterX_desktop.State;
 
 namespace AfterX_desktop.ViewModels
 {
     class LoginViewModel : BaseViewModel, IPageViewModel
     {
-        private UserLoginRequest userLoginRequest;
-        IdentityController identityController;
-
+        private string token;
 
         public LoginViewModel()
         {
-            loginCommand = new RelayCommand(Login);
-            userLoginRequest = new UserLoginRequest();
+            loginCommand = new RelayCommand<object>(Login);
+            token = null;
         }
 
-        private string userName;
+        private string email;
 
-        public string UserName
+        public string Email
         {
-            get { return userName; }
-            set { userName = value; OnPropertyChanged("UserName"); }
+            get { return email; }
+            set { email = value; OnPropertyChanged("Email"); }
         }
 
-        private string password;
+        private ICommand loginCommand;
 
-        public string Password
+        public ICommand LoginCommand
         {
-            get { return password; }
-            set { password = value; OnPropertyChanged("Password"); }
+            get{ return loginCommand; }
         }
 
-        private RelayCommand loginCommand;
+        private string loginText = "";
 
-        public RelayCommand LoginCommand
+        public string LoginText
         {
-            get{ return loginCommand;}
+            get { return loginText; }
+            set { loginText = value; }
         }
 
-        public async void Login()
+        public async void Login(object passwordBoxInput)
         {
-            userLoginRequest.Email = userName;
-            userLoginRequest.Password = "Admin123!";//Password;
-            IActionResult actionResult = await identityController.Login(userLoginRequest);
-            Console.WriteLine(actionResult.ToString());
-            //string Token = loginResult;
-            Mediator.Notify("seeReservations", "");
+            var passwordBox = passwordBoxInput as PasswordBox;
+            await Authenticator.Instance.Login(Email, passwordBox.Password);
+            if (Authenticator.Instance.IsLoggedIn) {
+                Mediator.Notify("seeReservations", "");
+            }
+            else
+            {
+                loginText = "Neispravan email ili lozinka.";
+            }
+            
         }
     }
 }

@@ -14,7 +14,8 @@ const instance = axios.create({
 
 axios.interceptors.request.use(
   async (config) => {
-    const token = localStorage.getItem('accessToken');
+    const user = localStorage.getItem('currentUser');
+    const { token } = user;
     config.headers.authorization = `Bearer ${token}`;
     const decodedToken = jwt.decode(token, { complete: true });
     console.log(decodedToken);

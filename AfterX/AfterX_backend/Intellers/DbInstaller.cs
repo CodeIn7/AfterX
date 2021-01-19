@@ -35,6 +35,8 @@ namespace EciTimeSheetWebApi.Installers
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<IClubService, ClubService>();
+            services.AddScoped<IDrinkService, DrinkService>();
+            services.AddScoped<IDrinkTypesService, DrinkTypesService>();
 
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ITableService, TableService>();

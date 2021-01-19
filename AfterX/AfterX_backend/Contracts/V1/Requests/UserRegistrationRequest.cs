@@ -12,7 +12,7 @@ namespace AfterX_backend.Contracts.V1.Requests
         public string Email { get; set; }
         public string Password { get; set; }
         public char Gender { get; set; }
-        public int RoleId { get; set; }
+        public string RoleName { get; set; }
         public DateTime Yearofbirth { get; set; }
         public string Telephone { get; set; }
     }
