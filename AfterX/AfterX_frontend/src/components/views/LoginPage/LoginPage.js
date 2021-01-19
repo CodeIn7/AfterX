@@ -5,7 +5,6 @@ import { Form, Input, Button, Checkbox, Typography } from 'antd';
 import PropType from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
 import './LoginPage.css';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {
