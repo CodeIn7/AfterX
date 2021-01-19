@@ -8,8 +8,8 @@ import BartenderRegister from './views/BartenderRegister/BartenderRegister';
 import UserLandingPage from './views/UserLandingPage/UserLandingPage';
 import CustomChatbot from './chatbot/CustomChatbot';
 import { currentUser, logout } from '../_services/authentication.service';
-import { HomePage } from '../HomePage';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
+import DrinkContainer from '../containers/DrinkContainer/DrinkContainer.js';
 // null   Anyone Can go inside
 // true   only logged in user can go inside
 // false  logged in user can't go inside
@@ -27,7 +27,7 @@ class App extends React.Component {
     currentUser.subscribe((x) => this.setState({ currentUser: x }));
   }
 
-  logout() {
+  _logout() {
     logout();
     // this.props.history.push('/login');
   }
@@ -39,33 +39,24 @@ class App extends React.Component {
         {currentUser ? (
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <div className="navbar-nav">
-              <a onClick={this.logout} className="nav-item nav-link">
+              <button onClick={this._logout} className="nav-item nav-link">
                 Logout
-              </a>
+              </button>
             </div>
           </nav>
         ) : null}
         <div style={{ paddingTop: '0px', minHeight: 'calc(100vh - 80px)' }}>
           <Switch>
-            {/* <Route exact path="/" component={Auth(LandingPage, null)} /> */}
             <Route exact path="/" component={LandingPage} />
             <Route
               exact
               path="/BartenderLanding"
               component={BartenderLandingPage}
-              //  component={Auth(BartenderLandingPage, true)}
             />
-            {/* <Route exact path="/login" component={Auth(BartenderLogin, null)} /> */}
             <Route exact path="/login" component={BartenderLogin} />
-            {/* <Route exact path="/User" component={Auth(UserLandingPage, null)} /> */}
             <Route exact path="/User" component={UserLandingPage} />
-            <Route
-              exact
-              path="/register"
-              // component={Auth(BartenderRegister, null)}
-              component={BartenderRegister}
-            />
-            <PrivateRoute exact path="/home" component={HomePage} />
+            <Route exact path="/register" component={BartenderRegister} />
+            <PrivateRoute exact path="/drinks" component={DrinkContainer} />
           </Switch>
           <CustomChatbot />
         </div>

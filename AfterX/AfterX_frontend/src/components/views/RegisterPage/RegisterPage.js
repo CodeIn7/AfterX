@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import 'antd/dist/antd.css';
 import { Form, Input, Button, Radio, DatePicker } from 'antd';
-import axios from '../../../axios';
+import { register } from '../../../_services/authentication.service';
 
 const formItemLayout = {
   labelCol: {
@@ -31,6 +31,7 @@ const tailFormItemLayout = {
 };
 
 const registrationValues = {
+  role: '',
   email: '',
   lastName: '',
   firstName: '',
@@ -57,23 +58,16 @@ class RegisterPage extends Component {
     this.state = {
       gender: null,
       birthDate: new Date(),
+      roleName: null,
     };
   }
 
   registerUser = (registrationData, _callback) => {
-    axios.post('/idnetity/register', registrationData).then((response) => {
-      console.log(response.data.token);
-      alert(`token: ${response.data.token}`);
-      // if (response.payload.success) {
-      //   window.location.href = 'http://localhost:3000/login';
-      // } else {
-      //   alert(response.payload.err.errmsg);
-      // }
-    });
+    register(registrationData, _callback);
   };
 
   render() {
-    const { gender, birthDate } = this.state;
+    const { gender, birthDate, roleName } = this.state;
     return (
       <Formik
         initialValues={{ ...registrationValues }}
@@ -81,18 +75,19 @@ class RegisterPage extends Component {
         onSubmit={(values, { setSubmitting }) => {
           console.log(values);
           setTimeout(() => {
-            const dataToSubmit = {
+            const registrationData = {
               email: values.email,
               password: values.password,
               firstName: values.firstName,
-              lastname: values.lastname,
+              lastname: values.lastName,
               telephone: values.telephone,
               gender: gender === 1 ? 'M' : 'F',
+              roleName: roleName === 1 ? 'BARTENDER' : 'USER',
               birthDate,
               image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
             };
 
-            this.registerUser(dataToSubmit, () => setSubmitting(false));
+            this.registerUser(registrationData, () => setSubmitting(false));
           }, 500);
         }}
       >
@@ -117,6 +112,23 @@ class RegisterPage extends Component {
                 {...formItemLayout}
                 onSubmit={handleSubmit}
               >
+                <Form.Item>
+                  <Radio.Group
+                    style={{ marginLeft: '120px' }}
+                    onChange={(e) =>
+                      this.setState({ roleName: e.target.value })
+                    }
+                    value={roleName}
+                  >
+                    <Radio value={1}>
+                      <span style={{ color: 'white' }}>Bartender</span>
+                    </Radio>
+                    <Radio value={2}>
+                      <span style={{ color: 'white' }}>Customer</span>
+                    </Radio>
+                  </Radio.Group>
+                </Form.Item>
+
                 <Form.Item required>
                   <Input
                     id="firstName"
@@ -178,22 +190,24 @@ class RegisterPage extends Component {
                     onChange={(date) => this.setState({ birthDate: date })}
                   />
                 </Form.Item>
-                {/* <Form.Item required >
-                <Input
-                  id="telephone"
-                  placeholder="Enter your phone number"
-                  type="text"
-                  value={values.telephone}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.telephone && touched.telephone ? 'text-input error' : 'text-input'
-                  }
-                />
-                {errors.telephone && touched.telephone && (
-                  <div className="input-feedback">{errors.telephone}</div>
-                )}
-              </Form.Item> */}
+                <Form.Item required>
+                  <Input
+                    id="telephone"
+                    placeholder="Enter your phone number"
+                    type="text"
+                    value={values.telephone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.telephone && touched.telephone
+                        ? 'text-input error'
+                        : 'text-input'
+                    }
+                  />
+                  {errors.telephone && touched.telephone && (
+                    <div className="input-feedback">{errors.telephone}</div>
+                  )}
+                </Form.Item>
 
                 <Form.Item
                   required
