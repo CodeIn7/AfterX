@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import { Formik } from 'formik';
 import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
-import response from '../../apiresponse';
+import PropTypes from 'prop-types';
 import { getYupSchemaFromMetaData } from '../../_helpers/yupSchemaCreator';
 
 const FormikForm = (props) => {
-  const validationSchema = getYupSchemaFromMetaData(response, [], []);
-  console.log(props);
-  const form = props.config.map((obj) => {
+  const { config } = props;
+  const validationSchema = getYupSchemaFromMetaData(config, [], []);
+  const form = config.map((obj) => {
     obj.value = '';
     return obj;
   });
@@ -20,8 +20,7 @@ const FormikForm = (props) => {
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           await new Promise((r) => setTimeout(r, 500));
-          alert(JSON.stringify(values, null, 2));
-          console.log(values);
+          props.submitHandler(values);
           setSubmitting(false);
         }}
       >
@@ -35,22 +34,25 @@ const FormikForm = (props) => {
             handleSubmit,
           } = _props;
           return (
-            <Form onSubmit={handleSubmit} style={{ width: '350px' }}>
+            <Form style={{ width: '350px' }}>
               Values:{JSON.stringify(values)}
               Errors:{JSON.stringify(errors)}
               <div>
                 {form.map((individualConfig) => {
                   const { field } = individualConfig;
                   return (
-                    <Form.Item>
-                      <label htmlFor={field}>{individualConfig.label}</label>
+                    <Form.Item key={field} label={individualConfig.label}>
                       <Input
                         type={individualConfig.type}
                         name={field}
-                        onChange={handleChange}
-                        style={{ ...individualConfig.style }}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        style={{
+                          margin: '10px',
+                        }}
                         id={field}
-                        placeholder={individualConfig.label}
+                        placeholder={individualConfig.placeholder}
                         className={
                           errors[field] && touched[field]
                             ? 'text-input error'
@@ -64,14 +66,13 @@ const FormikForm = (props) => {
                   );
                 })}
 
-                <button
+                <Button
                   type="submit"
-                  htmlType=""
                   disabled={isSubmitting}
-                  onSubmit={handleSubmit}
+                  onClick={handleSubmit}
                 >
                   Submit
-                </button>
+                </Button>
               </div>
             </Form>
           );
@@ -79,5 +80,9 @@ const FormikForm = (props) => {
       </Formik>
     </>
   );
+};
+FormikForm.propTypes = {
+  config: PropTypes.array,
+  submitHandler: PropTypes.func,
 };
 export default FormikForm;

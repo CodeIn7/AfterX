@@ -16,11 +16,14 @@ namespace AfterX_backend.Controllers.V1
         private IClubService _clubService;
         private IAddressService _addressService;
         private ITableService _tableService;
-        public ClubsController(IClubService clubService, IAddressService addressService, ITableService tableService)
+        private IDrinkClubService _drinkClubService;
+
+        public ClubsController(IClubService clubService, IAddressService addressService, ITableService tableService, IDrinkClubService drinkClubService )
         {
             _clubService = clubService;
             _addressService = addressService;
             _tableService = tableService;
+            _drinkClubService = drinkClubService;
         }
 
 
@@ -61,7 +64,8 @@ namespace AfterX_backend.Controllers.V1
         {
            
             var club = new Club {
-                Name = clubRequest.ClubName 
+                Name = clubRequest.ClubName ,
+                
             };
 
             var address = await _addressService.GetAddressByFormAsync(clubRequest.Cityid, clubRequest.Street, clubRequest.Number);
@@ -109,14 +113,28 @@ namespace AfterX_backend.Controllers.V1
                     tables.Add(table);
                 }
             }
-            
 
-
-            
             if (!await _tableService.CreateTablesAsync(tables, true, club.Id))
             {
                 return NotFound();//treba promijeniti u error
             }
+
+            List<DrinkClub> drinkInClub= new List<DrinkClub>();
+            foreach (KeyValuePair<int, decimal> entity in clubRequest.PriceList)
+            {
+                var drinkId = entity.Key;
+                var price = entity.Value;
+                var drinkClub = new DrinkClub { Clubid = club.Id, Drinkid = drinkId, Price = price };
+                drinkInClub.Add(drinkClub);
+            }
+
+            if (!await _drinkClubService.CreateDrinkClubListAsync(drinkInClub))
+            {
+                return NotFound();//treba promijeniti u error
+            }
+
+
+
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUri = baseUrl + "/" + ApiRoutes.Clubs.Get.Replace("{clubId}", club.Id.ToString());
 

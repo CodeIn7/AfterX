@@ -40,6 +40,7 @@ namespace EciTimeSheetWebApi.Installers
 
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ITableService, TableService>();
+            services.AddScoped<IDrinkClubService, DrinkClubService>();
             services.AddScoped<ITableTypeService, TableTypeService>();
 
 

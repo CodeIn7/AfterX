@@ -104,7 +104,7 @@ class List extends Component {
         <Button type="primary" onClick={this.showDrawer}>
           <PlusOutlined /> New account
         </Button>
-        <Table columns={columns} dataSource={data} /> */}
+        <Table columns={columns} dataSource={data} />
         <Drawer
           title="Create a new account"
           width={720}
