@@ -5478,7 +5478,7 @@ namespace AfterX_android
 			public const int design_text_input_start_icon = 2131427374;
 			
 			// aapt resource value: 0x7F0B002F
-			public const int Home = 2131427375;
+			public const int home = 2131427375;
 			
 			// aapt resource value: 0x7F0B0030
 			public const int mtrl_alert_dialog = 2131427376;

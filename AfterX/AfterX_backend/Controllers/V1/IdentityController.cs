@@ -39,7 +39,7 @@ namespace AfterX_backend.Controllers.V1
                 Email = registrationRequest.Email,
                 Userattribue = userattribue,
             };
-            var authResponse = await _identityService.RegisterAsync(user, registrationRequest.Password, registrationRequest.RoleId);
+            var authResponse = await _identityService.RegisterAsync(user, registrationRequest.Password, registrationRequest.RoleName);
 
             if (!authResponse.Success)
             {

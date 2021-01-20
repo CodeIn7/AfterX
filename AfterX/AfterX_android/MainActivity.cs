@@ -3,6 +3,7 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Widget;
+using Android.Content;
 
 namespace AfterX_android
 {
@@ -14,8 +15,18 @@ namespace AfterX_android
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Home);
+            SetContentView(Resource.Layout.activity_main);
             EditText email = FindViewById<EditText>(Resource.Id.emailAddress);
+            EditText password = FindViewById<EditText>(Resource.Id.passwordInput);
+            Button login = FindViewById<Button>(Resource.Id.login);
+            login.Click += (s, e) =>
+            {
+                Intent homeActivity = new Intent(this, typeof(HomeActivity));
+                homeActivity.PutExtra("email", email.Text);
+                homeActivity.PutExtra("password", password.Text);
+                StartActivity(homeActivity);
+            };
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
