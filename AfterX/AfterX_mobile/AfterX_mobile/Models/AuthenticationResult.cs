@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AfterX_backend.Domain
+namespace AfterX_mobile.Models
 {
     public class AuthenticationResult
     {

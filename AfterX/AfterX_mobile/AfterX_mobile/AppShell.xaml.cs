@@ -13,6 +13,9 @@ namespace AfterX_mobile
             InitializeComponent();
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
+            Routing.RegisterRoute(nameof(ReservationPage), typeof(ReservationPage));
+
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

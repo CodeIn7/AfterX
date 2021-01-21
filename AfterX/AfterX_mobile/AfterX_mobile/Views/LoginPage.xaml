@@ -6,9 +6,19 @@
              mc:Ignorable="d"
              x:Class="AfterX_mobile.Views.LoginPage"
              Shell.NavBarIsVisible="False">
+    
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+            <BoxView HeightRequest="10"/>
+            <StackLayout Orientation="Vertical" Spacing="10">
+                    <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email"   
+                           PlaceholderColor="LightGray" HeightRequest="40"   
+                           Keyboard="Email"/>
+                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="Password"   
+                           PlaceholderColor="LightGray" HeightRequest="40"   
+                           IsPassword="True"/>
+                </StackLayout>
+            <Button VerticalOptions="Center" Text="Login" HorizontalOptions="FillAndExpand" Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

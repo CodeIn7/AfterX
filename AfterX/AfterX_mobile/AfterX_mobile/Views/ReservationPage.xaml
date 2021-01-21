@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AfterX_mobile.Views.ReservationPage">
+    <ContentPage.Content>
+        <StackLayout Padding="10,10,10,10" VerticalOptions="Center">
+            <Button VerticalOptions="Center" Text="Stol" HorizontalOptions="FillAndExpand" Command="{Binding GetReservationForm}" CommandParameter="0"/>
+            <Button VerticalOptions="Center" Text="VIP" HorizontalOptions="FillAndExpand" Command="{Binding GetReservationForm}" CommandParameter="1"/>
+            <StackLayout IsVisible="true" >
+                <ListView x:Name="mylistview">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout >
+
+                                    <Label HorizontalOptions="Center"
+                           Text="{Binding Source={x:Reference stepper}, StringFormat='Qty. {0:N}', Path=Name}" 
+                           FontSize="11" 
+                           TextColor="Black" />
+
+                                    <Stepper ValueChanged="stepper_ValueChanged" 
+                             Minimum="0" 
+                             Maximum="10"         
+                             x:Name="stepper" 
+                             Value="{Binding Qty}" 
+                             Increment="1" 
+                             HorizontalOptions="Center" 
+                             VerticalOptions="CenterAndExpand"  />
+
+                                    <Label Text="{Binding DrinkPrice, StringFormat='Unit Price - RS. {0:N}'}" 
+                           FontSize="11"
+                           TextColor="LightGray" />
+
+                                    <Label HorizontalOptions="End"  
+                           VerticalOptions="End" 
+                           Text="{Binding totalprice}" 
+                           FontSize="15"
+                           TextColor="#da3043" />
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace AfterX
+namespace AfterX_mobile.Models
 {
     public partial class Review
     {

@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 
 
-namespace AfterX
+namespace AfterX_mobile.Models
 {
     public partial class Reservation
     {
         public Reservation()
         {
             Orders = new HashSet<Order>();
+        }
+
+        public Reservation(int id, int tableId, int userId, DateTime date, short numofPeople)
+        {
+            this.Id = id;
+            this.Tableid = tableId;
+            this.Reservationdate = date;
+            this.Numberofpeople = numofPeople;
         }
 
         public int Id { get; set; }

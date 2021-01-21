@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 
 
-namespace AfterX
+namespace AfterX_mobile.Models
 {
     public partial class Table
     {
         public Table()
         {
             Orders = new HashSet<Order>();
-            Reservations = new HashSet<Reservation>();
+            Reservations = new HashSet<Order>();
         }
 
         public int Id { get; set; }
@@ -23,6 +23,6 @@ namespace AfterX
         public virtual Club Club { get; set; }
         public virtual TableType Tabletype { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual ICollection<Order> Reservations { get; set; }
     }
 }

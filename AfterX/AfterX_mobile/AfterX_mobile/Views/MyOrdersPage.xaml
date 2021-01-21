@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AfterX_mobile.Views.MyOrdersPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:AfterX_mobile.ViewModels"
+             xmlns:model="clr-namespace:AfterX_mobile.Models">
+    <RefreshView x:DataType="local:MyOrdersViewModel" Command="{Binding LoadOrdersCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Orders}"
+                SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10" x:DataType="model:Order">
+                        <Label Text="{Binding Id}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            FontSize="16" />
+                        <Label Text="{Binding Reservationid}" 
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

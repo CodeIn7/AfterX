@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace AfterX
+namespace AfterX_mobile.Models
 {
     public partial class Club
     {
@@ -12,6 +12,13 @@ namespace AfterX
             Events = new HashSet<Event>();
             Reviews = new HashSet<Review>();
             Tables = new HashSet<Table>();
+        }
+
+        public Club(int id, string name, int addressId)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Addressid = addressId;
         }
 
         public int Id { get; set; }

@@ -4,15 +4,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using AfterX.Contracts.V1;
-using AfterX_backend.Contracts.V1.Requests;
 using System.Net.Http.Json;
+using AfterX_mobile.Contracts.V1.Requests;
+using AfterX_mobile.Contracts.V1;
 
-namespace AfterX_desktop.Helper
+namespace AfterX_mobile.Helper
 {
     public static class RestHelper
     {
-        private static string Base = "https://localhost:5001/";
+        private static string Base = "https://192.168.0.35:45455/";
         
         public static async Task<string> Login(string email, string password)
         {
@@ -33,6 +33,27 @@ namespace AfterX_desktop.Helper
                         }
                     }
 
+                }
+            }
+            return string.Empty;
+
+        }
+
+        public static async Task<string> GetCities()
+        {
+
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage res = await client.GetAsync(Base+ApiRoutes.Cities.GetAll))
+                {
+                    using (HttpContent content = res.Content)
+                    {
+                        string data = await content.ReadAsStringAsync();
+                        if (data != null)
+                        {
+                            return data;
+                        }
+                    }
                 }
             }
             return string.Empty;

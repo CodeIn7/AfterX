@@ -1,4 +1,4 @@
-﻿namespace AfterX.Controllers
+﻿namespace AfterX_mobile.Controllers
 {
     public class UpdateRoleRequest
     {

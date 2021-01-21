@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AfterX_backend.Controllers.V1
+namespace AfterX_mobile.Controllers.V1
 {
 
 

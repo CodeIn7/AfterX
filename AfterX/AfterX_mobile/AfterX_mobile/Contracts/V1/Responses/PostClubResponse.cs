@@ -1,10 +1,10 @@
-﻿using AfterX;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AfterX_mobile.Models;
 
-namespace AfterX_backend.Contracts.V1.Responses
+namespace AfterX_mobile.Contracts.V1.Responses
 {
     public class PostClubResponse
     {

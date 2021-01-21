@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AfterX.Contracts.V1.Responses
+namespace AfterX_mobile.Contracts.V1.Responses
 {
     public class PostCityResponse
     {

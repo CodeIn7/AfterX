@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 
 
-namespace AfterX
+namespace AfterX_mobile.Models
 {
     public partial class City
     {
-        public City()
+
+        public City(int id, int cid, string name, decimal zip)
         {
-            Addresses = new HashSet<Address>();
+            this.Id = id;
+            this.Countryid = cid;
+            this.Name = name;
+            this.Zip = zip;
         }
 
         public int Id { get; set; }
@@ -16,7 +20,7 @@ namespace AfterX
         public string Name { get; set; }
         public decimal? Zip { get; set; }
 
-        public virtual Country Country { get; set; }
-        public virtual ICollection<Address> Addresses { get; set; }
+        //public virtual Country Country { get; set; }
+        //public virtual ICollection<Address> Addresses { get; set; }
     }
 }
