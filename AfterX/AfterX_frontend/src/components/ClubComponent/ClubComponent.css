@@ -1,13 +1,35 @@
 .reservationForm {
-  width: 800px;
+  width: 700px;
   height: auto;
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   z-index: 9;
-  top: 5%;
+  top: 4%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
-  padding: 3%;
+  padding: 2%;
+}
+
+.ant-drawer-content {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.ant-drawer-footer {
+  border: 0;
+}
+
+.ant-drawer-header {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 0;
+}
+
+.ant-drawer-body {
+  border: 0;
+}
+
+.ant-drawer-title {
+  color: white;
+  font-size: 25px;
 }

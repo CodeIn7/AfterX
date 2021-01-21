@@ -166,7 +166,7 @@ export class ClubComponent extends Component {
         tablesConfig.push({
           type: 'number',
           field: `${table.id}_numberOfTables`,
-          label: `${table.name}-number of tables`,
+          label: `${table.name}-number of tables:`,
           validationType: 'number',
           placeholder: `Enter number of  tables in club`,
           validations: [
@@ -254,8 +254,8 @@ export class ClubComponent extends Component {
           submitHandler={this.clubSubmitHandler}
         />
         <Row justify="space-between" style={{ paddingLeft: '3%' }}>
-          <Col span={12}>
-            <Row>
+          <Col span={10}>
+            <Row justify="space-between">
               <Col span={10}>
                 <Button
                   style={{ marginLeft: '10px' }}

@@ -4,6 +4,16 @@ import { Formik } from 'formik';
 import { Form, Icon, Input, Button, Row, Col, Typography } from 'antd';
 import PropTypes from 'prop-types';
 import { getYupSchemaFromMetaData } from '../../_helpers/yupSchemaCreator';
+import './FormikForm.css';
+
+const layout = {
+  labelCol: {
+    span: 24,
+  },
+  wrapperCol: {
+    span: 24,
+  },
+};
 
 const FormikForm = (props) => {
   const { config } = props;
@@ -35,12 +45,17 @@ const FormikForm = (props) => {
           } = _props;
           return (
             <Col span={24}>
-              <Form style={{ width: '100%', padding: '3%' }}>
+              <Form {...layout} style={{ width: '100%', padding: '3%' }}>
                 <div>
                   {form.map((individualConfig) => {
                     const { field } = individualConfig;
                     return (
-                      <Form.Item key={field}>
+                      <Form.Item
+                        key={field}
+                        label={individualConfig.label}
+                        className="myLabel"
+                        style={{ color: 'white' }}
+                      >
                         <Input
                           type={individualConfig.type}
                           name={field}
