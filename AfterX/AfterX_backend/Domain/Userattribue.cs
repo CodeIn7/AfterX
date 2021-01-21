@@ -21,6 +21,10 @@ namespace AfterX
         public string Telephone { get; set; }
 
         public virtual User User { get; set; }
+
+        public int? ClubId { get; set; }
+        public virtual Club Club{ get; set; }
+
         public virtual ICollection<RoleUser> RoleUsers { get; set; }
     }
 }

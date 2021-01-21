@@ -28,6 +28,15 @@ namespace AfterX_backend.Services.ServiceImplementations
             _dataContext = dataContext;
         }
 
+        public ClaimsPrincipal User { get; private set; }
+
+        public async Task<int> GetUserIdByName(string name)
+        {
+            var user = await _userManager.GetUserAsync(this.User);
+
+            return user.Id;
+        }
+
         public async Task<AuthenticationResult> LoginAsync(string email, string password)
         {
             var user = await _dataContext.Users

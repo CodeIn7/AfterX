@@ -30,8 +30,6 @@ namespace AfterX_backend.Controllers.V1
                 Gender = registrationRequest.Gender,
                 Yearofbirth = registrationRequest.Yearofbirth,
                 Telephone = registrationRequest.Telephone,
-                
-
             };
             User user = new User
             {
