@@ -10,6 +10,7 @@ import CustomChatbot from './chatbot/CustomChatbot';
 import { currentUser, logout } from '../_services/authentication.service';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import DrinkContainer from '../containers/DrinkContainer/DrinkContainer.js';
+import ClubContainer from '../containers/ClubContainer/ClubContainer';
 // null   Anyone Can go inside
 // true   only logged in user can go inside
 // false  logged in user can't go inside
@@ -57,6 +58,7 @@ class App extends React.Component {
             <Route exact path="/User" component={UserLandingPage} />
             <Route exact path="/register" component={BartenderRegister} />
             <PrivateRoute exact path="/drinks" component={DrinkContainer} />
+            <PrivateRoute exact path="/clubs" component={ClubContainer} />
           </Switch>
           <CustomChatbot />
         </div>
