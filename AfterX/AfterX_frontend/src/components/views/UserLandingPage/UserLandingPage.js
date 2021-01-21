@@ -7,11 +7,9 @@ import slide3 from '../slides/slide3.jfif';
 import slide4 from '../slides/slide4.jpg';
 import slide5 from '../slides/slide5.jpg';
 import image from '../wb.png';
-import { Row, Col } from 'antd';
-
+import { Row, Col, Menu } from 'antd';
 
 import MyReservationsForm from '../../containers/MyReservationsForm';
-
 
 const slides = [slide1, slide2, slide3, slide4, slide5];
 
@@ -25,15 +23,15 @@ const s = {
 function UserLandingPage() {
   return (
     <Row justify="center" className={s.container}>
-       <Col span={24} className={s.header}>
-          <img className="logoImage" src={image} alt="Slika" />
+      <Col span={24} className={s.header}>
+        <img className="logoImage" src={image} alt="Slika" />
+      </Col>
+      <Col span={24} className={s.main}>
+        <Slideshow slides={slides} />
+        <Col span={20} className="reservationForm">
+          <MyReservationsForm></MyReservationsForm>
         </Col>
-        <Col span={24} className={s.main}>
-          <Slideshow slides={slides} />
-        </Col>
-        <Col span={18} style={{marginTop: 70}} className="reservationForm">
-            <MyReservationsForm></MyReservationsForm>
-        </Col>
+      </Col>
     </Row>
   );
 }
