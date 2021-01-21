@@ -2,7 +2,7 @@ export const clubConfig = [
   {
     type: 'text',
     field: 'clubName',
-    label: 'Club Name',
+    placeholder: 'Enter club name',
     validationType: 'string',
     validations: [
       {
@@ -14,7 +14,7 @@ export const clubConfig = [
   {
     type: 'text',
     field: 'city',
-    label: 'City',
+    placeholder: 'Enter city name',
     validationType: 'string',
     validations: [
       {
@@ -26,7 +26,7 @@ export const clubConfig = [
   {
     type: 'text',
     field: 'street',
-    label: 'Street',
+    placeholder: 'Enter street',
     validationType: 'string',
     validations: [
       {
@@ -38,7 +38,7 @@ export const clubConfig = [
   {
     type: 'text',
     field: 'streetNumber',
-    label: 'Street Number',
+    placeholder: 'Enter street number',
     validationType: 'string',
     validations: [
       {

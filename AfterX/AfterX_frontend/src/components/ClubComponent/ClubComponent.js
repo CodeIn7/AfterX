@@ -4,8 +4,8 @@
 /* eslint-disable eqeqeq */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Drawer, Button, Alert } from 'antd';
-
+import { Drawer, Button, Alert, Row, Col } from 'antd';
+import './ClubComponent.css';
 import { PlusOutlined } from '@ant-design/icons';
 import FormikForm from '../FormikForm/FormikForm';
 import { clubConfig } from './config';
@@ -166,7 +166,7 @@ export class ClubComponent extends Component {
         tablesConfig.push({
           type: 'number',
           field: `${table.id}_numberOfTables`,
-          label: `${table.name}-number of tables`,
+          label: `${table.name}-number of tables:`,
           validationType: 'number',
           placeholder: `Enter number of  tables in club`,
           validations: [
@@ -245,19 +245,39 @@ export class ClubComponent extends Component {
             onClose={() => this.setState({ showAlert: false })}
           />
         )}
-        <Button type="primary" onClick={this.showDrinksDrawer}>
-          <PlusOutlined /> Add Drink Prices
-        </Button>
-        <Button type="primary" onClick={this.showTablesDrawer}>
-          <PlusOutlined /> Add Tables
-        </Button>
+        <Row justify="center">
+          <h2 style={{ color: 'white' }}>Create club</h2>
+        </Row>
         <FormikForm
+          style={{ width: '100%' }}
           config={clubConfig}
           submitHandler={this.clubSubmitHandler}
         />
-        <Button type="primary" onClick={this.submitClub}>
-          Save Club
-        </Button>
+        <Row justify="space-between" style={{ paddingLeft: '3%' }}>
+          <Col span={10}>
+            <Row justify="space-between">
+              <Col span={10}>
+                <Button
+                  style={{ marginLeft: '10px' }}
+                  type="primary"
+                  onClick={this.showDrinksDrawer}
+                >
+                  <PlusOutlined /> Add Drinks
+                </Button>
+              </Col>
+              <Col span={10}>
+                <Button type="primary" onClick={this.showTablesDrawer}>
+                  <PlusOutlined /> Add Tables
+                </Button>
+              </Col>
+            </Row>
+          </Col>
+          <Col span={4}>
+            <Button type="danger" onClick={this.submitClub}>
+              Save Club
+            </Button>
+          </Col>
+        </Row>
         <Drawer
           title="Add Drink Prices"
           width={720}
