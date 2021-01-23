@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Router, Route, Switch, withRouter } from 'react-router-dom';
 // import Auth from '../hoc/auth';
 import LandingPage from './views/LandingPage/LandingPage.js';
 import BartenderLandingPage from './views/BartenderLandingPage/BartenderLandingPage.js';
@@ -11,9 +11,11 @@ import { currentUser, logout } from '../_services/authentication.service';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import DrinkContainer from '../containers/DrinkContainer/DrinkContainer.js';
 import ClubContainer from '../containers/ClubContainer/ClubContainer';
+import { createBrowserHistory } from 'history';
 // null   Anyone Can go inside
 // true   only logged in user can go inside
 // false  logged in user can't go inside
+const history = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {

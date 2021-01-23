@@ -51,7 +51,13 @@ namespace AfterX_backend.Services.ServiceImplementations
 
         public async Task<List<Club>> GetClubsByCityIdAsync(int cityId)
         {
-            return await _dataContext.Clubs.Where(club => club.Address.Cityid == cityId).ToListAsync();
+            var clubs = await _dataContext.Clubs
+                .Include(a => a.Tables).ThenInclude(table => table.Tabletype)
+                .Include(a => a.DrinkClubs).ThenInclude(d => d.Drink)
+                .Where(club => club.Address.Cityid == cityId)
+                .ToListAsync();
+
+            return clubs;
         }
 
         public async Task<bool> UpdateClubAsync(Club cityToUpdate)

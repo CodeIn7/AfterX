@@ -44,7 +44,16 @@ namespace AfterX_backend.Controllers.V1
 
             return Ok(club);
         }
+        [HttpGet(ApiRoutes.Clubs.GetByCityId)]
+        public async Task<IActionResult> GetByCityId([FromRoute] int cityId)
+        {
+            var clubs = await _clubService.GetClubsByCityIdAsync(cityId);
 
+            if (clubs == null)
+                return NotFound();
+
+            return Ok(clubs);
+        }
         //[HttpPut(ApiRoutes.Clubs.Update)]
         //public async Task<IActionResult> Update([FromRoute] int clubId, [FromBody] UpdateClubRequest request)
         //{

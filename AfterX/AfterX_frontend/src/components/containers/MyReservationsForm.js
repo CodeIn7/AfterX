@@ -1,41 +1,42 @@
 import React, { Component, useState } from 'react';
-import { Form, Button, TimePicker, Select, DatePicker, Row } from 'antd';
+import {
+  Form,
+  Button,
+  TimePicker,
+  Select,
+  DatePicker,
+  Card,
+  Drawer,
+  Col,
+  InputNumber,
+  Row,
+} from 'antd';
 import moment from 'moment';
 import axios from '../../axios';
-import styles from './MyReservationsForm.module.css';
+import './MyReservationsForm.css';
+import { PlusOutlined } from '@ant-design/icons';
+import TextArea from 'antd/lib/input/TextArea';
 
 const { Option } = Select;
+const { Meta } = Card;
+const formItemLayout = {
+  labelCol: {
+    span: 24,
+  },
+  wrapperCol: {
+    span: 24,
+  },
+};
 class MyReservationsForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      cities: [],
-      clubs: [],
-    };
   }
-  // const [componentSize, setComponentSize] = useState('default');
-  onChange(time, timeString) {
-    console.log(time, timeString);
-  }
-
-  onChange(value) {
-    console.log(`selected ${value}`);
-  }
-
-  onBlur() {
-    console.log('blur');
-  }
-
-  onFocus() {
-    console.log('focus');
-  }
-
-  onSearch(val) {
-    console.log('search:', val);
-  }
-
-  onFormLayoutChange = ({ size }) => {
-    // setComponentSize(size);
+  state = {
+    cities: [],
+    clubs: [],
+    clubsFlag: false,
+    visible: false,
+    childrenDrawer: false,
   };
   componentDidMount() {
     axios.get('/cities').then((res) => {
@@ -45,16 +46,61 @@ class MyReservationsForm extends Component {
 
       this.setState({ cities });
     });
-    axios.get('/clubs').then((res) => {
+  }
+  // const [componentSize, setComponentSize] = useState('default');
+  onChange(time, timeString) {
+    console.log(time, timeString);
+  }
+
+  handleClick = (value) => {
+    axios.get('/clubs/city/' + value).then((res) => {
+      console.log(res.data);
       const clubs = res.data.map((club) => {
         return { id: club.id, name: club.name };
       });
       this.setState({ clubs });
     });
-  }
+  };
+
+  showDrawer = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      visible: false,
+    });
+  };
+
+  showChildrenDrawer = () => {
+    this.setState({
+      childrenDrawer: true,
+    });
+  };
+
+  onChildrenDrawerClose = () => {
+    this.setState({
+      childrenDrawer: false,
+    });
+  };
+
+  onFormLayoutChange = ({ size }) => {
+    // setComponentSize(size);
+  };
+
+  onFinish = (fieldValues) => {
+    const values = {
+      ...fieldValues,
+      'date-picker': fieldValues['date-picker'].format('YYYY-MM-DD'),
+      'time-picker': fieldValues['time-picker'].format('HH:mm:ss'),
+    };
+    console.log('Success:', values);
+  };
+
   render() {
-    const { cities } = this.state;
-    const { clubs } = this.state;
+    const { cities, clubs } = this.state;
     return (
       <>
         <Row justify="center">
@@ -80,10 +126,7 @@ class MyReservationsForm extends Component {
               style={{ width: '100%' }}
               placeholder="Select a city"
               optionFilterProp="children"
-              onChange={this.onChange}
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
-              onSearch={this.onSearch}
+              onChange={this.handleClick}
               filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
@@ -98,13 +141,11 @@ class MyReservationsForm extends Component {
           <Form.Item>
             <Select
               showSearch
+              disabled={clubs.length < 1}
               style={{ width: '100%' }}
               placeholder="Select a club"
               optionFilterProp="children"
               onChange={this.onChange}
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
-              onSearch={this.onSearch}
               filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
@@ -118,17 +159,112 @@ class MyReservationsForm extends Component {
           </Form.Item>
           <Row justify="center">
             <Form.Item span={5}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" onClick={this.showDrawer}>
                 Continue
               </Button>
             </Form.Item>
           </Row>
-          {/* <Form.Item label={<label style={{ color: "white" }}>Pick date:</label>}>
-          <DatePicker style={{ display: 'inline-block', width: 'calc(50% - 8px)' }} />
-        </Form.Item>
-        <Form.Item label={<label style={{ color: "white" }}>Pick time:</label>}>
-            <TimePicker style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0' }} onChange={onChange} defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />
-        </Form.Item> */}
+          <Drawer
+            title="Make reservation"
+            width={520}
+            closable={false}
+            onClose={this.onClose}
+            visible={this.state.visible}
+          >
+            <Form {...formItemLayout} onFinish={this.onFinish}>
+              <Form.Item
+                className="myLabel"
+                name="numberOfPeople"
+                label="How many people will be at the table?"
+              >
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="Number of people"
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="tableId"
+                className="myLabel"
+                label="Which table do you prefer?"
+              >
+                <Select allowClear placeholder="Select table">
+                  <Option value="1">Option 1</Option>
+                  <Option value="2">Option 2</Option>
+                  <Option value="3">Option 3</Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                name="date-picker"
+                label="Which date are you partying?"
+                className="myLabel"
+              >
+                <DatePicker style={{ width: '100%' }} />
+              </Form.Item>
+            </Form>
+            <Card style={{ width: '100%', marginTop: 16 }}>
+              <Row justify="space-between">
+                <Col span={4}>
+                  <Button
+                    type="primary"
+                    shape="circle"
+                    onClick={this.showChildrenDrawer}
+                    icon={<PlusOutlined />}
+                    size="large"
+                  />
+                </Col>
+                <Col span={20}>
+                  <Meta
+                    title="Add order"
+                    description="Adding order requires drinks to select"
+                  />
+                </Col>
+              </Row>
+            </Card>
+            <Drawer
+              title="Add order"
+              width={400}
+              closable={false}
+              onClose={this.onChildrenDrawerClose}
+              visible={this.state.childrenDrawer}
+            >
+              <Form {...formItemLayout} onFinish={this.onFinish}>
+                <Form.Item
+                  className="myLabel"
+                  name="note"
+                  label="Do you have a note for bartender?"
+                >
+                  <TextArea style={{ width: '100%' }} placeholder="Note" />
+                </Form.Item>
+
+                <Form.Item
+                  name="drinkId"
+                  className="myLabel"
+                  label="Which drinks do you want to order?"
+                >
+                  <Select allowClear placeholder="Select drinks">
+                    <Option value="1">Option 1</Option>
+                    <Option value="2">Option 2</Option>
+                    <Option value="3">Option 3</Option>
+                  </Select>
+                </Form.Item>
+
+                <Form.Item
+                  name="time-picker"
+                  label="Which time do you want your order to come?"
+                  className="myLabel"
+                >
+                  <TimePicker style={{ width: '100%' }} />
+                </Form.Item>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    Submit
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Drawer>
+          </Drawer>
         </Form>
       </>
     );

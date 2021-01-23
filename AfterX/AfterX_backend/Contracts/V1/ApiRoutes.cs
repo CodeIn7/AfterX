@@ -18,6 +18,7 @@ namespace AfterX.Contracts.V1
             public const string Update = Base + "/clubs/{clubId}";
             public const string Delete = Base + "/clubs/{clubId}";
             public const string Get = Base + "/clubs/{clubId}";
+            public const string GetByCityId = Base + "/clubs/city/{cityId}";
         }
         public static class Cities
         {
