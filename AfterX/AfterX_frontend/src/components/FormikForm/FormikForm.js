@@ -1,7 +1,7 @@
 /* eslint-disable react/state-in-constructor */
-import React, { Component } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
-import { Form, Icon, Input, Button, Row, Col, Typography } from 'antd';
+import { Form, Input, Button, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import { getYupSchemaFromMetaData } from '../../_helpers/yupSchemaCreator';
 import './FormikForm.css';

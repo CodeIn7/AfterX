@@ -3,7 +3,6 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable eqeqeq */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Drawer, Button, Alert, Row, Col } from 'antd';
 import './ClubComponent.css';
 import { PlusOutlined } from '@ant-design/icons';
