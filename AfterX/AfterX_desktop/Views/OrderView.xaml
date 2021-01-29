@@ -62,10 +62,10 @@
                                     Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Rezervacija"
                                     Width="auto"
-                                    Binding="{Binding Path=ReservationId}"/>
+                                    Binding="{Binding Path=Reservationid}"/>
                 <DataGridTextColumn Header="Stol"
                                     Width="auto"
-                                    Binding="{Binding Path=TableId}"/>
+                                    Binding="{Binding Path=Tableid}"/>
                 <DataGridTextColumn Header="Vrijeme"
                                     Width="auto"
                                     Binding="{Binding Path=Time}"/>

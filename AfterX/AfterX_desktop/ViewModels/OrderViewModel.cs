@@ -5,32 +5,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AfterX_desktop.Models;
 using AfterX_desktop.Commands;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using AfterX_backend.Services.ServiceImplementations;
 using AfterX_desktop.State;
+using AfterX;
+using AfterX_desktop.Helper;
 
 namespace AfterX_desktop.ViewModels
 {
     class OrderViewModel : BaseViewModel, IPageViewModel
     {
 
-        OrderService ObjOrderService;
         private int currentOrder;
 
         public OrderViewModel()
         {
-            ObjOrderService = new OrderService();
-            LoadData();
-            getOrderDrinksCommand = new RelayCommand<int>(GetOrderDrinks, null);
-            searchCommand = new RelayCommand(Search);
+            LoadDataAsync();
+            getOrderDrinksCommand = new RelayCommand<int>(GetOrderDrinksAsync, null);
+            //searchCommand = new RelayCommand(Search);
             hideOrderDrinksCommand = new RelayCommand(HideOrderDrinks);
-            endOrderCommand = new RelayCommand<int>(EndOrder, null);
+            endOrderCommand = new RelayCommand<int>(EndOrderAsync, null);
         }
 
-        #region DrinkButtonHandler
         private string buttonText;
 
         public string ButtonText
@@ -69,9 +67,9 @@ namespace AfterX_desktop.ViewModels
 
         }
 
-        private List<OrderDrink> currentOrderDrinks;
+        private ObservableCollection<OrderDrink> currentOrderDrinks;
 
-        public List<OrderDrink> CurrentOrderDrinks
+        public ObservableCollection<OrderDrink> CurrentOrderDrinks
         {
             get { return currentOrderDrinks; }
             set { currentOrderDrinks = value; OnPropertyChanged("CurrentOrderDrinks"); }
@@ -84,13 +82,13 @@ namespace AfterX_desktop.ViewModels
             get { return getOrderDrinksCommand; }
         }
 
-        public void GetOrderDrinks(int Id)
-        {
-            try
-            {
-                ButtonText = "Save";
-                ButtonClickCommand = HideOrderDrinksCommand;
-                var ObjOrderDrinks = ObjOrderService.GetOrderDrinks(Id);
+         public async void GetOrderDrinksAsync(int Id)
+         {
+             try
+             {
+                 ButtonText = "Save";
+                 ButtonClickCommand = HideOrderDrinksCommand;
+                ObservableCollection<OrderDrink> ObjOrderDrinks = await RestHelper.GetOrderDrinks(Id);
                 if (ObjOrderDrinks != null)
                 {
                     CurrentOrderDrinks = ObjOrderDrinks;
@@ -101,12 +99,11 @@ namespace AfterX_desktop.ViewModels
                     Message = "Order Drinks not found";
                 }
             }
-            catch (Exception ex)
-            {
-                Message = "Error";
-            }
-        }
-        #endregion
+             catch (Exception ex)
+             {
+                 Message = "Error";
+             }
+         }
 
         #region LoadData
         private ObservableCollection<Order> ordersList;
@@ -116,9 +113,9 @@ namespace AfterX_desktop.ViewModels
             get { return ordersList; }
             set { ordersList = value; OnPropertyChanged("OrdersList"); }
         }
-        private void LoadData()
+        private async Task LoadDataAsync()
         {
-            OrdersList = new ObservableCollection<Order>(ObjOrderService.GetAll());
+            OrdersList = await RestHelper.GetOrders();
         }
         #endregion
 
@@ -138,23 +135,16 @@ namespace AfterX_desktop.ViewModels
             get { return endOrderCommand; }
         }
 
-        public void EndOrder(int Id)
+        public async void EndOrderAsync(int Id)
         {
             try
             {
-                if (ObjOrderService.End(Id))
-                {   
-                    if(currentOrder == Id)
-                    {
-                        CurrentOrderDrinks = null;
-                    }
-                    LoadData();
-                    
-                }
-                else
+                await RestHelper.EndOrder(Id);
+                if (currentOrder == Id)
                 {
-                    Message = "Order Drinks not found";
+                    CurrentOrderDrinks = null;
                 }
+                LoadDataAsync();
             }
             catch (Exception ex)
             {
@@ -178,7 +168,7 @@ namespace AfterX_desktop.ViewModels
             set { selectedId = value; OnPropertyChanged("SelectedId"); }
         }
 
-        public void Search()
+        /*public void Search()
         {
         int Id = 101;
 
@@ -197,11 +187,8 @@ namespace AfterX_desktop.ViewModels
             {
                 Message = "Error";
             }
-        }
+        }*/
         #endregion
 
     }
-
-
-
 }

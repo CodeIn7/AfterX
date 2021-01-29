@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AfterX_desktop.Views"
-             xmlns:models="clr-namespace:AfterX_desktop.Models"
              xmlns:controls="clr-namespace:AfterX_desktop.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -44,13 +43,16 @@
                                         Binding="{Binding Path=Id}"/>
                     <DataGridTextColumn Header="Korisnik"
                                         Width="auto"
-                                        Binding="{Binding Path=UserId}"/>
+                                        Binding="{Binding Path=Userid}"/>
                     <DataGridTextColumn Header="Stol"
                                         Width="auto"
-                                        Binding="{Binding Path=TableId}"/>
+                                        Binding="{Binding Path=Tableid}"/>
                     <DataGridTextColumn Header="Datum"
                                         Width="auto"
-                                        Binding="{Binding Path=ReservationDate}"/>
+                                        Binding="{Binding Path=Reservationdate}"/>
+                    <DataGridTextColumn Header="Broj ljudi"
+                                        Width="auto"
+                                        Binding="{Binding Path=Numberofpeople}"/>
 
                 </DataGrid.Columns>
             </DataGrid>

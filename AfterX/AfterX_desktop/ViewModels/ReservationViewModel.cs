@@ -5,32 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AfterX_desktop.Models;
 using AfterX_desktop.Commands;
 using System.Collections.ObjectModel;
 using AfterX_desktop.State;
+using AfterX_desktop.Helper;
+using AfterX;
+using AfterX.Contracts.V1;
 
 namespace AfterX_desktop.ViewModels
 {
     public class ReservationViewModel : BaseViewModel, IPageViewModel
     {
-        /*#region INotifyPropertyChanged_Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion*/
-
-        ReservationService ObjReservationService;
+        //ReservationService ObjReservationService;
         public ReservationViewModel()
         {
-            ObjReservationService = new ReservationService();
-            LoadData();
+            //ObjReservationService = new ReservationService();
+            LoadDataAsync();
+
             currentReservation = new Reservation();
-            
         }
 
         #region DisplayOperation
@@ -41,11 +34,13 @@ namespace AfterX_desktop.ViewModels
             get { return reservationsList; }
             set { reservationsList = value; OnPropertyChanged("ReservationsList"); }
         }
-        private void LoadData()
+        private async Task LoadDataAsync()
         {
             string token = Authenticator.Instance.Token;
             System.Diagnostics.Debug.WriteLine("TOKEN", token);
-            ReservationsList = new ObservableCollection<Reservation>(ObjReservationService.GetAll());
+            ReservationsList = await RestHelper.GetReservations();
+            System.Diagnostics.Debug.WriteLine("Reservations list: "  + ReservationsList);
+
         }
         #endregion
 
@@ -64,36 +59,5 @@ namespace AfterX_desktop.ViewModels
             get { return message; }
             set { message = value; OnPropertyChanged("Message"); }
         }
-
-        /*#region SearchOperation
-        private RelayCommand searchCommand;
-
-        public RelayCommand SearchCommand
-        {
-            get { return searchCommand; }
-        }
-
-        public void Search()
-        {
-            try
-            {
-                var ObjReservation = ObjReservationService.Search(CurrentReservation.Id);
-                if (ObjReservation != null)
-                {
-                    CurrentReservation.TableId = ObjReservation.TableId;
-                    CurrentReservation.UserId = ObjReservation.UserId;
-                    CurrentReservation.ReservationDate = ObjReservation.ReservationDate;
-                }
-                else
-                {
-                    Message = "Resrvation not found";
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-        #endregion*/
     }
 }

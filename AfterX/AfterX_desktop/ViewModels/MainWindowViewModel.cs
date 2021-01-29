@@ -45,12 +45,12 @@ namespace AfterX_desktop.ViewModels
 
         private void seeReservations(object obj)
         {
-            ChangeViewModel(PageViewModels[1]);
+            ChangeViewModel(new ReservationViewModel());
         }
 
         private void seeOrders(object obj)
         {
-            ChangeViewModel(PageViewModels[2]);
+            ChangeViewModel(new OrderViewModel());
         }
 
         private void logout(object obj)
@@ -60,8 +60,8 @@ namespace AfterX_desktop.ViewModels
         public MainWindowViewModel()
         {
             PageViewModels.Add(new LoginViewModel());
-            PageViewModels.Add(new ReservationViewModel());
-            PageViewModels.Add(new OrderViewModel());
+            //PageViewModels.Add(new ReservationViewModel());
+            //PageViewModels.Add(new OrderViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
 
