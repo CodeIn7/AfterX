@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
+import TextArea from 'antd/lib/input/TextArea';
 import {
   Form,
   Button,
@@ -12,9 +14,8 @@ import {
   Row,
 } from 'antd';
 import axios from '../../axios';
+
 import './MyReservationsForm.css';
-import { PlusOutlined } from '@ant-design/icons';
-import TextArea from 'antd/lib/input/TextArea';
 
 const { Option } = Select;
 const { Meta } = Card;
@@ -29,36 +30,99 @@ const formItemLayout = {
 class MyReservationsForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      cities: [],
+      clubs: [],
+      tableTypes: [],
+
+      visible: false,
+
+      numberOfPeople: null,
+      pickedTable: null,
+      pickedDate: null,
+      pickedCity: null,
+      pickedClub: null,
+    };
   }
-  state = {
-    cities: [],
-    clubs: [],
-    clubsFlag: false,
-    visible: false,
-    childrenDrawer: false,
-  };
+
   componentDidMount() {
-    axios.get('/cities').then((res) => {
-      const cities = res.data.map((city) => {
-        return { id: city.id, name: city.name };
-      });
+    this.getFromUrl('/cities', (data) => {
+      const cities = data.map((city) => ({ id: city.id, name: city.name }));
 
       this.setState({ cities });
     });
-  }
-  // const [componentSize, setComponentSize] = useState('default');
-  onChange(time, timeString) {
-    console.log(time, timeString);
+    this.getFromUrl('/tableTypes', (data) => {
+      const tableTypes = data.map((type) => ({ id: type.id, name: type.name }));
+      this.setState({ tableTypes });
+    });
   }
 
-  handleClick = (value) => {
-    axios.get('/clubs/city/' + value).then((res) => {
-      console.log(res.data);
-      const clubs = res.data.map((club) => {
-        return { id: club.id, name: club.name };
+  saveReservation = () => {
+    if (this.checkCanBeSaved()) {
+      const data = this.getReservationData();
+      axios.post('/reservations', data).then((response) => {
+        console.log(response);
+        const { reservationId } = response.data;
+        this.props.history.push(`/reservations/${reservationId}`);
       });
+    }
+  };
+
+  getReservationData = () => {
+    const { pickedClub, numberOfPeople, pickedTable, pickedDate } = this.state;
+    const form = {
+      ClubId: pickedClub,
+      TableTypeId: pickedTable,
+      Reservationdate: pickedDate,
+      Numberofpeople: numberOfPeople,
+    };
+    return form;
+  };
+
+  checkCanBeSaved = () => {
+    const {
+      pickedCity,
+      pickedClub,
+      numberOfPeople,
+      pickedTable,
+      pickedDate,
+    } = this.state;
+    if (
+      pickedCity &&
+      pickedClub &&
+      numberOfPeople &&
+      pickedDate &&
+      pickedTable
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  // const [componentSize, setComponentSize] = useState('default');
+
+  handleClick = (value) => {
+    this.setState({ pickedCity: value });
+    axios.get(`/clubs/city/${value}`).then((res) => {
+      console.log(res.data);
+      const clubs = res.data.map((club) => ({ id: club.id, name: club.name }));
       this.setState({ clubs });
     });
+  };
+
+  getFromUrl = (url, _callback) => {
+    axios
+      .get(url)
+      .then((response) => {
+        _callback(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  handleContinueButton = () => {
+    this.showDrawer();
   };
 
   showDrawer = () => {
@@ -73,33 +137,12 @@ class MyReservationsForm extends Component {
     });
   };
 
-  showChildrenDrawer = () => {
-    this.setState({
-      childrenDrawer: true,
-    });
-  };
-
-  onChildrenDrawerClose = () => {
-    this.setState({
-      childrenDrawer: false,
-    });
-  };
-
   onFormLayoutChange = ({ size }) => {
     // setComponentSize(size);
   };
 
-  onFinish = (fieldValues) => {
-    const values = {
-      ...fieldValues,
-      'date-picker': fieldValues['date-picker'].format('YYYY-MM-DD'),
-      'time-picker': fieldValues['time-picker'].format('HH:mm:ss'),
-    };
-    console.log('Success:', values);
-  };
-
   render() {
-    const { cities, clubs } = this.state;
+    const { cities, clubs, tableTypes, visible } = this.state;
     return (
       <>
         <Row justify="center">
@@ -144,7 +187,7 @@ class MyReservationsForm extends Component {
               style={{ width: '100%' }}
               placeholder="Select a club"
               optionFilterProp="children"
-              onChange={this.onChange}
+              onChange={(e) => this.setState({ pickedClub: e })}
               filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
@@ -158,7 +201,7 @@ class MyReservationsForm extends Component {
           </Form.Item>
           <Row justify="center">
             <Form.Item span={5}>
-              <Button type="primary" onClick={this.showDrawer}>
+              <Button type="primary" onClick={this.handleContinueButton}>
                 Continue
               </Button>
             </Form.Item>
@@ -168,9 +211,9 @@ class MyReservationsForm extends Component {
             width={520}
             closable={false}
             onClose={this.onClose}
-            visible={this.state.visible}
+            visible={visible}
           >
-            <Form {...formItemLayout} onFinish={this.onFinish}>
+            <Form {...formItemLayout}>
               <Form.Item
                 className="myLabel"
                 name="numberOfPeople"
@@ -179,6 +222,7 @@ class MyReservationsForm extends Component {
                 <InputNumber
                   style={{ width: '100%' }}
                   placeholder="Number of people"
+                  onChange={(e) => this.setState({ numberOfPeople: e })}
                 />
               </Form.Item>
 
@@ -187,10 +231,16 @@ class MyReservationsForm extends Component {
                 className="myLabel"
                 label="Which table do you prefer?"
               >
-                <Select allowClear placeholder="Select table">
-                  <Option value="1">Option 1</Option>
-                  <Option value="2">Option 2</Option>
-                  <Option value="3">Option 3</Option>
+                <Select
+                  allowClear
+                  placeholder="Select table"
+                  onChange={(e) => this.setState({ pickedTable: e })}
+                >
+                  {tableTypes.map((type) => (
+                    <Option key={type.id} value={type.id}>
+                      {type.name}
+                    </Option>
+                  ))}
                 </Select>
               </Form.Item>
 
@@ -199,70 +249,23 @@ class MyReservationsForm extends Component {
                 label="Which date are you partying?"
                 className="myLabel"
               >
-                <DatePicker style={{ width: '100%' }} />
+                <DatePicker
+                  style={{ width: '100%' }}
+                  onChange={(date, dateString) =>
+                    this.setState({ pickedDate: dateString })
+                  }
+                />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  onClick={this.saveReservation}
+                >
+                  Submit
+                </Button>
               </Form.Item>
             </Form>
-            <Card style={{ width: '100%', marginTop: 16 }}>
-              <Row justify="space-between">
-                <Col span={4}>
-                  <Button
-                    type="primary"
-                    shape="circle"
-                    onClick={this.showChildrenDrawer}
-                    icon={<PlusOutlined />}
-                    size="large"
-                  />
-                </Col>
-                <Col span={20}>
-                  <Meta
-                    title="Add order"
-                    description="Adding order requires drinks to select"
-                  />
-                </Col>
-              </Row>
-            </Card>
-            <Drawer
-              title="Add order"
-              width={400}
-              closable={false}
-              onClose={this.onChildrenDrawerClose}
-              visible={this.state.childrenDrawer}
-            >
-              <Form {...formItemLayout} onFinish={this.onFinish}>
-                <Form.Item
-                  className="myLabel"
-                  name="note"
-                  label="Do you have a note for bartender?"
-                >
-                  <TextArea style={{ width: '100%' }} placeholder="Note" />
-                </Form.Item>
-
-                <Form.Item
-                  name="drinkId"
-                  className="myLabel"
-                  label="Which drinks do you want to order?"
-                >
-                  <Select allowClear placeholder="Select drinks">
-                    <Option value="1">Option 1</Option>
-                    <Option value="2">Option 2</Option>
-                    <Option value="3">Option 3</Option>
-                  </Select>
-                </Form.Item>
-
-                <Form.Item
-                  name="time-picker"
-                  label="Which time do you want your order to come?"
-                  className="myLabel"
-                >
-                  <TimePicker style={{ width: '100%' }} />
-                </Form.Item>
-                <Form.Item>
-                  <Button type="primary" htmlType="submit">
-                    Submit
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Drawer>
           </Drawer>
         </Form>
       </>

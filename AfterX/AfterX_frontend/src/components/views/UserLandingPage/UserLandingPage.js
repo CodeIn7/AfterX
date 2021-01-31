@@ -1,5 +1,6 @@
 import React from 'react';
 import './UserLandingPage.css';
+import { Row, Col, Button } from 'antd';
 import Slideshow from '../../utils/Slideshow';
 import slide1 from '../slides/slide1.jpg';
 import slide2 from '../slides/slide6.jpg';
@@ -7,7 +8,6 @@ import slide3 from '../slides/slide3.jfif';
 import slide4 from '../slides/slide4.jpg';
 import slide5 from '../slides/slide5.jpg';
 import image from '../gg1.png';
-import { Row, Col, Button } from 'antd';
 
 import MyReservationsForm from '../../containers/MyReservationsForm';
 
@@ -20,7 +20,7 @@ const s = {
   footer: 'flex1 fCenter',
 };
 
-function UserLandingPage() {
+function UserLandingPage(props) {
   return (
     <Row justify="center" className={s.container}>
       <Col
@@ -42,7 +42,7 @@ function UserLandingPage() {
               className="navButton"
               type="primary"
               ghost
-              onClick={() => this.navigateTo('/reservations')}
+              onClick={() => props.history.push('/reservations')}
             >
               Your reservations
             </Button>
@@ -62,7 +62,7 @@ function UserLandingPage() {
       <Col span={24} className={s.main}>
         <Slideshow slides={slides} />
         <Col span={20} className="reservationForm">
-          <MyReservationsForm></MyReservationsForm>
+          <MyReservationsForm history={props.history} />
         </Col>
       </Col>
     </Row>

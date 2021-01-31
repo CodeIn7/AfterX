@@ -27,6 +27,13 @@ namespace AfterX_backend.Controllers.V1
             _reservationService = reservationService;
             _orderService = orderService;
         }
+        public async Task<User> getUser()
+        {
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+            var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            User user = await _userManager.FindByNameAsync(currentUserName);
+            return user;
+        }
 
         [HttpGet(ApiRoutes.Reservations.GetAll)]
         public async Task<IActionResult> Index()
@@ -47,52 +54,63 @@ namespace AfterX_backend.Controllers.V1
             return Ok(reservation);
         }
 
+        [HttpGet(ApiRoutes.Reservations.GetByUserId)]
+        public async Task<IActionResult> DetailsByUserId()
+        {
+            User user = await getUser();
+            if (user == null) return Unauthorized();
+            var reservations = await _reservationService.GetReservationsByUserIdAsync(user.Id);
+
+
+            return Ok(reservations);
+        }
         [HttpPost(ApiRoutes.Reservations.Create)]
         public async Task<IActionResult> Create([FromBody] PostReservationRequest request)
         {
-            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
-            var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            User user = await _userManager.FindByNameAsync(currentUserName);
-            if(user ==null) return Unauthorized();
+            //System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+            //var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //User user = await _userManager.FindByNameAsync(currentUserName);
+            User user = await getUser();
+            if (user ==null) return Unauthorized();
+
 
             var reservation = new Reservation {
                 Numberofpeople=request.Numberofpeople,
-                Tableid = request.Tableid,
                 Reservationdate = request.Reservationdate,
                 Userid = user.Id
             };
 
-            await _reservationService.CreateReservationAsync(reservation);
+            await _reservationService.CreateReservationAsync(reservation,request.ClubId,request.TableTypeId);
 
-            foreach(var orderRequest in request.Orders)
-            {
-                var order = new Order
-                {
-                    Active = true,
-                    Note = orderRequest.Note,
-                    Reservationid = reservation.Id,
-                    Tableid = request.Tableid,
-                    Time = orderRequest.Time.TimeOfDay,
-                };
+            //foreach(var orderRequest in request.Orders)
+            //{
+            //    var order = new Order
+            //    {
+            //        Active = true,
+            //        Note = orderRequest.Note,
+            //        Reservationid = reservation.Id,
+            //        Tableid = request.Tableid,
+            //        Time = orderRequest.Time.TimeOfDay,
+            //    };
 
-                await _orderService.CreateOrderAsync(order);
+            //    await _orderService.CreateOrderAsync(order);
 
-                List<OrderDrink> orderDrinks = new List<OrderDrink>();
+            //    List<OrderDrink> orderDrinks = new List<OrderDrink>();
 
-                foreach (var drink in orderRequest.drinks)
-                {
-                    var orderDrink = new OrderDrink
-                    {
-                        Drinkid = drink.Drinkid,
-                        Nobottles = drink.Nobottles,
-                        Orderid = order.Id,
-                    };
-                    orderDrinks.Add(orderDrink);
-                };
-               await _orderDrinkService.CreateOrdersAsync(orderDrinks);
+            //    foreach (var drink in orderRequest.drinks)
+            //    {
+            //        var orderDrink = new OrderDrink
+            //        {
+            //            Drinkid = drink.Drinkid,
+            //            Nobottles = drink.Nobottles,
+            //            Orderid = order.Id,
+            //        };
+            //        orderDrinks.Add(orderDrink);
+            //    };
+            //   await _orderDrinkService.CreateOrdersAsync(orderDrinks);
 
 
-            };
+            //};
 
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
@@ -100,6 +118,7 @@ namespace AfterX_backend.Controllers.V1
 
             var response = new PostReservationResponse
             {
+                reservationId= reservation.Id,
             };
 
             return Created(locationUri, response);

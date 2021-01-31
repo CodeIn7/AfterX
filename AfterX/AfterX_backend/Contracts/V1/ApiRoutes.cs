@@ -75,6 +75,7 @@ namespace AfterX.Contracts.V1
             public const string Update = Base + "/reservations/{reservationId}";
             public const string Delete = Base + "/reservations/{reservationId}";
             public const string Get = Base + "/reservations/{reservationId}";
+            public const string GetByUserId= Base + "/reservations/userId/";
         }
         public static class Orders
         {

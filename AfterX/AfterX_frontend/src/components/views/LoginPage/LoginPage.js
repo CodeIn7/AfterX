@@ -20,7 +20,7 @@ class LoginPage extends Component {
     this.state = {};
     if (currentUserValue) {
       // eslint-disable-next-line react/destructuring-assignment
-      this.props.history.push('/');
+      this.props.history.push('/home');
     }
   }
 

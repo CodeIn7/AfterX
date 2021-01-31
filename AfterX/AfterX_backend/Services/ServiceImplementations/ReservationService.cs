@@ -8,15 +8,32 @@ using System.Threading.Tasks;
 
 namespace AfterX_backend.Services.ServiceImplementations
 {
-    public class ReservationService: IReservationService
+    public class ReservationService : IReservationService
     {
         private readonly DataContext _dataContext;
         public ReservationService(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
-        public async Task<bool> CreateReservationAsync(Reservation reservation)
+        public async Task<bool> CreateReservationAsync(Reservation reservation, int clubId, int tableTypeId)
         {
+            List<Table> tables = await _dataContext.Tables
+                .Include(a => a.Reservations)
+                .Where(a =>a.Tabletypeid == tableTypeId&& a.Clubid == clubId).ToListAsync();
+
+            foreach(var t in tables)
+            {
+                Reservation r = t.Reservations.Where(_r => _r.Reservationdate == reservation.Reservationdate).FirstOrDefault();
+                if (r == null)
+                {
+                    reservation.Table = t ;
+                    break;
+                }
+            };
+            if (reservation.Table == null)
+            {
+                return false;
+            }
             _dataContext.Add(reservation);
             var updated = await _dataContext.SaveChangesAsync();
 
@@ -37,7 +54,7 @@ namespace AfterX_backend.Services.ServiceImplementations
         public async Task<Reservation> GetReservationByIdAsync(int reservationId)
         {
             var reservation = await _dataContext.Reservations
-                .Include(c=>c.Orders).Include(a=>a.Table)
+                .Include(c => c.Orders).Include(a => a.Table)
                 .FirstOrDefaultAsync(m => m.Id == reservationId);
 
             return reservation;
@@ -47,6 +64,14 @@ namespace AfterX_backend.Services.ServiceImplementations
         {
             return await _dataContext.Reservations.ToListAsync();
 
+        }
+
+        public async Task<List<Reservation>> GetReservationsByUserIdAsync(int userId)
+        {
+            var reservations = await _dataContext.Reservations
+                .Include(a=>a.Table).ThenInclude(b=>b.Tabletype)
+                .Where(reservation=>reservation.Userid==userId).ToListAsync();
+            return reservations;
         }
 
         public async Task<bool> UpdateReservationAsync(Reservation reservationToUpdate)

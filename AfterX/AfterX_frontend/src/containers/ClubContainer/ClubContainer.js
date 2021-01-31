@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row, Col, Button } from 'antd';
 import ClubComponent from '../../components/ClubComponent/ClubComponent';
 import Slideshow from '../../components/utils/Slideshow';
 import slide1 from '../../components/views/slides/slide1.jpg';
@@ -7,8 +8,8 @@ import slide3 from '../../components/views/slides/slide3.jfif';
 import slide4 from '../../components/views/slides/slide4.jpg';
 import slide5 from '../../components/views/slides/slide5.jpg';
 import image from '../../components/views/gg1.png';
-import { Row, Col, Button } from 'antd';
 import './ClubContainer.css';
+
 const slides = [slide1, slide2, slide3, slide4, slide5];
 
 const s = {
@@ -22,6 +23,7 @@ export class ClubContainer extends Component {
   navigateTo = (URL) => {
     this.props.history.push(URL);
   };
+
   render() {
     return (
       <Row justify="center" className={s.container}>

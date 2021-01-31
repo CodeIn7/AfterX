@@ -10,7 +10,8 @@ namespace AfterX_backend.Services.Interfaces
     {
         Task<List<Reservation>> GetReservationsAsync();
         Task<Reservation> GetReservationByIdAsync(int reservationId);
-        Task<bool> CreateReservationAsync(Reservation reservation);
+        Task<List<Reservation>> GetReservationsByUserIdAsync(int userId);
+        Task<bool> CreateReservationAsync(Reservation reservation, int cityId, int tableTypeId);
         Task<bool> UpdateReservationAsync(Reservation cityToUpdate);
         Task<bool> DeleteReservationAsync(int reservationId);
     }

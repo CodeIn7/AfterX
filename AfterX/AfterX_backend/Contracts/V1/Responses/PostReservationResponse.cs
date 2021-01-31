@@ -7,5 +7,6 @@ namespace AfterX_backend.Contracts.V1.Responses
 {
     public class PostReservationResponse
     {
+        public int reservationId { get; set; }
     }
 }
