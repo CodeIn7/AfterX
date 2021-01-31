@@ -41,13 +41,16 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="auto" />
 
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Text="Pretraži po rezervaciji:"/>
                 <TextBox x:Name="ReservationId" Grid.Column="1" Margin="20 0 0 0" Text="{Binding Path=SelectedId}"/>
-                <Button Grid.Column="3" Command="{Binding SearchCommand}" HorizontalAlignment="Center">Pretraži</Button>
-            </Grid>
+                <Button Grid.Column="3" Command="{Binding SearchCommand}" CommandParameter="{Binding Path=SelectedId}" HorizontalAlignment="Center">Pretraži</Button>
+                    <Button Grid.Column="5" Command="{Binding ShowwAll}" HorizontalAlignment="Center">X</Button>
+                </Grid>
         </Grid>
         
         <DataGrid Name="dgOrders"
@@ -102,10 +105,10 @@
                     ItemsSource="{Binding Path=CurrentOrderDrinks, Mode=TwoWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="auto"
-                                        Binding="{Binding Path=Drink}">
+                                        Binding="{Binding Path=Drink.Name}">
                     </DataGridTextColumn>
                     <DataGridTextColumn Width="auto"
-                                        Binding="{Binding Path=NoBottles}">
+                                        Binding="{Binding Path=Nobottles}">
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
