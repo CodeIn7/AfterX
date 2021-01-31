@@ -1,15 +1,15 @@
-.registerLink{
-    color: white;
-    text-decoration: underline;
+.registerLink {
+  color: white;
+  text-decoration: underline;
 }
 .registerLink:hover {
-    color: #1890ff;
+  color: #1890ff;
 }
 
-.forgotPassLink{
-    text-decoration: "underline";
-    color: white;
+.forgotPassLink {
+  text-decoration: 'underline';
+  color: white;
 }
-.forgotPassLink:hover{
-    color: #1890ff;
+.forgotPassLink:hover {
+  color: #1890ff;
 }

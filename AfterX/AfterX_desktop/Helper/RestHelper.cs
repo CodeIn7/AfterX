@@ -97,24 +97,51 @@ namespace AfterX_desktop.Helper
             }
         }
 
-        public static async Task<ObservableCollection<OrderDrink>> GetOrderDrinks(int orderId)
+        public static async Task<ObservableCollection<OrderDrink>> GetOrderDrinks(int ordersId)
         {
 
-            ObservableCollection<OrderDrink> data = new ObservableCollection<OrderDrink>();
+            Order data = new Order();
+            ObservableCollection<OrderDrink> orderDrinks = new ObservableCollection<OrderDrink>();
+
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Authenticator.Instance.Token);
 
-                using (HttpResponseMessage res = await client.GetAsync($"https://localhost:5001/api/v1/orders/{orderId}"))
+                using (HttpResponseMessage res = await client.GetAsync($"https://localhost:5001/api/v1/orders/{ordersId}"))
                 {
                     using (HttpContent content = res.Content)
                     {
-                        data = await content.ReadAsAsync<ObservableCollection<OrderDrink>>();
+                        data = await content.ReadAsAsync<Order>();
+                        orderDrinks = new ObservableCollection<OrderDrink>(data.OrderDrinks);
                     }
 
                 }
             }
-            return data;
+            return orderDrinks;
+        }
+
+        public static async Task<ObservableCollection<Order>> GetOrderByReservationId(int reservationId)
+        {
+
+            Reservation data = new Reservation();
+            ObservableCollection<Order> orderDrinks = new ObservableCollection<Order>();
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Authenticator.Instance.Token);
+
+                using (HttpResponseMessage res = await client.GetAsync($"https://localhost:5001/api/v1/reservations/{reservationId}"))
+                {
+                    using (HttpContent content = res.Content)
+                    {
+                        data = await content.ReadAsAsync<Reservation>();
+                        if(data != null)
+                            orderDrinks = new ObservableCollection<Order>(data.Orders);
+                    }
+
+                }
+            }
+            return orderDrinks;
         }
     }
 }

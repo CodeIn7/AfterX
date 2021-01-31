@@ -1,112 +1,119 @@
-@import url("https://fonts.googleapis.com/css?family=Quicksand");
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "Quicksand", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
 }
-.floatingRegister{
-    width: 40%;
-    height: 77%;
-    min-width: 400px;
-    background-color: rgba(0, 0, 0, 0.7);   
-    position:  absolute;
-    z-index: 9;
-    top:-14%;
-    margin-top: 15%;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    padding:5%
+.registerForm {
+  width: 500px;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  z-index: 9;
+  top: 4%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  padding: 2%;
 }
 
 .logoImage {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    position: absolute;
-    z-index: 10;
-    top: 40;
-    margin-top: 2%;
-    height: 18%;
-    width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: absolute;
+  z-index: 10;
+  margin-top: 4%;
+  height: auto;
+  width: 100px;
 }
 
+.logoImage {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: 40;
+  margin-top: 2%;
+  height: 18%;
+  width: auto;
+}
 
 .spanStyle {
-    position: "absolute";
-    top: "50%";
-    left: "50%";
-    transform: "translate(-50%, -50%)"
-  }
-
+  position: 'absolute';
+  top: '50%';
+  left: '50%';
+  transform: 'translate(-50%, -50%)';
+}
 
 /*====== WIDTH ======*/
 .screenW {
-    width: 100vw;
+  width: 100vw;
 }
 
 /*====== HEIGHT ======*/
 .screenH {
-    height: 100vh;
+  height: 100vh;
 }
 
 .height70 {
-    height: 50px;
+  height: 50px;
 }
 /*====== BG COLOR ======*/
 .dGray {
-    background-color: #333;
+  background-color: #333;
 }
 .white {
-    background-color: #fff;
+  background-color: #fff;
 }
 .white50 {
-    background-color: #ffffff80;
+  background-color: #ffffff80;
 }
 .black50 {
-    background-color: #00000080;
+  background-color: #00000080;
 }
 /*====== FONT ======*/
 .fSize2 {
-    height: 7%;
-    font-size: 2rem;
+  height: 7%;
+  font-size: 2rem;
 }
 /*====== IMAGE ======*/
 .imgCover {
-    object-fit: cover;
+  object-fit: cover;
 }
 /*====== POSITION ======*/
 .abs {
-    position: absolute;
+  position: absolute;
 }
 .bot0 {
-    bottom: 0;
+  bottom: 0;
 }
 /*====== FLEX ======*/
 .df {
-    display: flex;
+  display: flex;
 }
 .row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .col {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .flex1 {
-    flex: 1;
+  flex: 1;
 }
 .flex8 {
-    flex: 8;
+  flex: 8;
 }
 
 /*====== CUSTOM ======*/
 .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-    transition: background-color 1s ease-in-out;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  transition: background-color 1s ease-in-out;
 }

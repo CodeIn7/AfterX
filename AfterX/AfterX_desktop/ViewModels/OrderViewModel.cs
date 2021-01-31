@@ -24,9 +24,10 @@ namespace AfterX_desktop.ViewModels
         {
             LoadDataAsync();
             getOrderDrinksCommand = new RelayCommand<int>(GetOrderDrinksAsync, null);
-            //searchCommand = new RelayCommand(Search);
+            searchCommand = new RelayCommand<int>(SearchAsync, null);
             hideOrderDrinksCommand = new RelayCommand(HideOrderDrinks);
             endOrderCommand = new RelayCommand<int>(EndOrderAsync, null);
+            showAll = new RelayCommand(LoadDataAsync);
         }
 
         private string buttonText;
@@ -113,7 +114,15 @@ namespace AfterX_desktop.ViewModels
             get { return ordersList; }
             set { ordersList = value; OnPropertyChanged("OrdersList"); }
         }
-        private async Task LoadDataAsync()
+
+        private ICommand showAll;
+
+        public  ICommand ShowwAll
+        {
+            get { return showAll; }
+        }
+
+        private async void LoadDataAsync()
         {
             OrdersList = await RestHelper.GetOrders();
         }
@@ -168,26 +177,18 @@ namespace AfterX_desktop.ViewModels
             set { selectedId = value; OnPropertyChanged("SelectedId"); }
         }
 
-        /*public void Search()
+        public async void SearchAsync(int Id)
         {
-        int Id = 101;
 
             try
             {
-                if (ObjOrderService.Search(selectedId) != null)
-                {
-                    OrdersList = new ObservableCollection<Order>(ObjOrderService.Search(selectedId));
-                }
-                else
-                {
-                    Message = "Order Drinks not found";
-                }
+                OrdersList = await RestHelper.GetOrderByReservationId(Id);
             }
             catch (Exception ex)
             {
                 Message = "Error";
             }
-        }*/
+        }
         #endregion
 
     }

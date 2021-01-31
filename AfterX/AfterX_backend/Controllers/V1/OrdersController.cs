@@ -36,10 +36,9 @@ namespace AfterX_backend.Controllers.V1
         }
 
         [HttpGet(ApiRoutes.Orders.Get)]
-        public async Task<IActionResult> Details([FromRoute] int orderId)
+        public async Task<IActionResult> Details([FromRoute] int ordersId)
         {
-
-            var order = await _orderService.GetOrderByIdAsync(orderId);
+            var order = await _orderService.GetOrderByIdAsync(ordersId);
             if (order == null)
             {
                 return NotFound();
