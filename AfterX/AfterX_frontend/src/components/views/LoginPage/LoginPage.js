@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-// import { Form, Input, Button, Checkbox, Typography } from 'antd';
-import { Form, Input, Button, Checkbox, Typography } from 'antd';
+import { Form, Input, Row, Col, Button, Checkbox, Typography } from 'antd';
 import PropType from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -65,56 +64,59 @@ class LoginPage extends Component {
               // handleReset,
             } = _props;
             return (
-              <div className="app">
-                <Title style={{ color: 'white' }} level={2}>
-                  Log In
-                </Title>
-                <form onSubmit={handleSubmit} style={{ width: '350px' }}>
-                  <Form.Item required>
-                    <Input
-                      id="email"
-                      prefix={
-                        <UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
-                      }
-                      placeholder="Enter your email"
-                      type="email"
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={
-                        errors.email && touched.email
-                          ? 'text-input error'
-                          : 'text-input'
-                      }
-                    />
-                    {errors.email && touched.email && (
-                      <div className="input-feedback">{errors.email}</div>
-                    )}
-                  </Form.Item>
+              <Row justify="center">
+                <Col span={24}>
+                  <Title style={{ color: 'white' }} level={2}>
+                    Log In
+                  </Title>
+                </Col>
+                <Col span={24}>
+                  <form onSubmit={handleSubmit}>
+                    <Form.Item required>
+                      <Input
+                        id="email"
+                        prefix={
+                          <UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
+                        }
+                        placeholder="Enter your email"
+                        type="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className={
+                          errors.email && touched.email
+                            ? 'text-input error'
+                            : 'text-input'
+                        }
+                      />
+                      {errors.email && touched.email && (
+                        <div className="input-feedback">{errors.email}</div>
+                      )}
+                    </Form.Item>
 
-                  <Form.Item required>
-                    <Input
-                      id="password"
-                      prefix={
-                        <LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
-                      }
-                      placeholder="Enter your password"
-                      type="password"
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={
-                        errors.password && touched.password
-                          ? 'text-input error'
-                          : 'text-input'
-                      }
-                    />
-                    {errors.password && touched.password && (
-                      <div className="input-feedback">{errors.password}</div>
-                    )}
-                  </Form.Item>
+                    <Form.Item required>
+                      <Input
+                        id="password"
+                        prefix={
+                          <LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
+                        }
+                        placeholder="Enter your password"
+                        type="password"
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className={
+                          errors.password && touched.password
+                            ? 'text-input error'
+                            : 'text-input'
+                        }
+                      />
+                      {errors.password && touched.password && (
+                        <div className="input-feedback">{errors.password}</div>
+                      )}
+                    </Form.Item>
 
-                  {/* formErrorMessage && (
+                    {/* formErrorMessage && (
                   // eslint-disable-next-line jsx-a11y/label-has-associated-control
                   <label>
                     <p
@@ -131,52 +133,53 @@ class LoginPage extends Component {
                   </label>
                 ) */}
 
-                  <Form.Item>
-                    <Checkbox
-                      id="rememberMe"
-                      style={{ color: 'white' }}
-                      // onChange={handleRememberMe}
-                      // checked={rememberMe}
-                    >
-                      Remember me
-                    </Checkbox>
-                    <a
-                      className="login-form-forgot"
-                      href="/reset_user"
-                      style={{
-                        float: 'right',
-                        color: 'black',
-                        fontFamily: 'Georgia',
-                        fontDecoration: 'underline',
-                      }}
-                    >
-                      <span className="forgotPassLink">forgot password?</span>
-                    </a>
-                    <div>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="login-form-button"
-                        style={{ minWidth: '100%' }}
-                        disabled={isSubmitting}
-                        onSubmit={handleSubmit}
+                    <Form.Item>
+                      <Checkbox
+                        id="rememberMe"
+                        style={{ color: 'white' }}
+                        // onChange={handleRememberMe}
+                        // checked={rememberMe}
                       >
-                        Log in
-                      </Button>
-                    </div>
-                    <div style={{ fontFamily: 'Georgia', color: 'white' }}>
-                      Or{' '}
+                        Remember me
+                      </Checkbox>
                       <a
-                        className="registerLink"
-                        style={{ fontFamily: 'Georgia' }}
-                        href="/register"
+                        className="login-form-forgot"
+                        href="/reset_user"
+                        style={{
+                          float: 'right',
+                          color: 'black',
+                          fontFamily: 'Georgia',
+                          fontDecoration: 'underline',
+                        }}
                       >
-                        register now!
+                        <span className="forgotPassLink">forgot password?</span>
                       </a>
-                    </div>
-                  </Form.Item>
-                </form>
-              </div>
+                      <div>
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          className="login-form-button"
+                          style={{ minWidth: '100%' }}
+                          disabled={isSubmitting}
+                          onSubmit={handleSubmit}
+                        >
+                          Log in
+                        </Button>
+                      </div>
+                      <div style={{ fontFamily: 'Georgia', color: 'white' }}>
+                        Or{' '}
+                        <a
+                          className="registerLink"
+                          style={{ fontFamily: 'Georgia' }}
+                          href="/register"
+                        >
+                          register now!
+                        </a>
+                      </div>
+                    </Form.Item>
+                  </form>
+                </Col>
+              </Row>
             );
           }}
         </Formik>

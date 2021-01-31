@@ -8,6 +8,7 @@ import slide4 from '../slides/slide4.jpg';
 import slide5 from '../slides/slide5.jpg';
 import LoginPage from '../LoginPage/LoginPage';
 import image from '../wb.png';
+import { Row, Col } from 'antd';
 
 const s = {
   container: 'screenW screenH dGray col',
@@ -22,19 +23,47 @@ const slides = [slide1, slide2, slide3, slide4, slide5];
 class BartenderLogin extends Component {
   render() {
     return (
-      <div style={{overflowX: "hidden", overflowY: "hidden"}} className={s.container}>
-        <div className={s.header}>
-          <img className="logoImage" src={image} alt="Slika" />
-        </div>
-        <div className={s.main}>
+      <Row justify="center" className={s.container}>
+        <Col
+          span={24}
+          flex="auto"
+          className={s.header}
+          style={{ height: '15px' }}
+        >
+          <Row
+            justify="space-between"
+            align="middle"
+            style={{ height: '100%' }}
+          >
+            <Col span={3} style={{ width: '100%', height: '100%' }}>
+              {/* <Button
+                className="navButton"
+                type="primary"
+                ghost
+                onClick={() => this.navigateTo('/drinks')}
+              >
+                Your clubs
+              </Button> */}
+            </Col>
+            <Col span={4} style={{ width: '100%', height: '100%' }}>
+              <Row justify="center">
+                <img className="logoImage" src={image} alt="Slika" />
+              </Row>
+            </Col>
+            <Col span={3} style={{ width: '100%', height: '100%' }}>
+              {/* <Button className="navButton" type="primary" ghost>
+                Log out
+              </Button> */}
+            </Col>
+          </Row>
+        </Col>
+        <Col span={24} className={s.main}>
           <Slideshow slides={slides} />
-        </div>
-        <div className="floatingLogin">
-          <div style={{ marginTop: '-200px' }}>
+          <Col span={20} className="reservationForm">
             <LoginPage />
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Col>
+      </Row>
     );
   }
 }

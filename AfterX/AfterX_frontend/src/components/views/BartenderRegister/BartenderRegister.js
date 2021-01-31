@@ -8,13 +8,13 @@ import slide4 from '../slides/slide4.jpg';
 import slide5 from '../slides/slide5.jpg';
 import './BartenderRegister.css';
 import image from '../wb.png';
+import { Row, Col } from 'antd';
 
 const s = {
   container: 'screenW screenH dGray col',
   header: 'flex1 fCenter fSize2',
   main: 'flex8 white',
   footer: 'flex1 fCenter',
-  floatingLogin: 'floatingLogin',
 };
 
 const slides = [slide1, slide2, slide3, slide4, slide5];
@@ -22,20 +22,47 @@ const slides = [slide1, slide2, slide3, slide4, slide5];
 class BartenderRegister extends Component {
   render() {
     return (
-      <div className={s.container}>
-        <div className={s.header}>
-          <img className="logoImage" src={image} alt="slika" />
-        </div>
-        <div className={s.main}>
+      <Row justify="center" className={s.container}>
+        <Col
+          span={24}
+          flex="auto"
+          className={s.header}
+          style={{ height: '15px' }}
+        >
+          <Row
+            justify="space-between"
+            align="middle"
+            style={{ height: '100%' }}
+          >
+            <Col span={3} style={{ width: '100%', height: '100%' }}>
+              {/* <Button
+              className="navButton"
+              type="primary"
+              ghost
+              onClick={() => this.navigateTo('/drinks')}
+            >
+              Your clubs
+            </Button> */}
+            </Col>
+            <Col span={4} style={{ width: '100%', height: '100%' }}>
+              <Row justify="center">
+                <img className="logoImage" src={image} alt="Slika" />
+              </Row>
+            </Col>
+            <Col span={3} style={{ width: '100%', height: '100%' }}>
+              {/* <Button className="navButton" type="primary" ghost>
+              Log out
+            </Button> */}
+            </Col>
+          </Row>
+        </Col>
+        <Col span={24} className={s.main}>
           <Slideshow slides={slides} />
-        </div>
-
-        <div className="floatingRegister">
-          <div style={{ marginTop: '-150px' }}>
+          <Col span={20} className="registerForm">
             <RegisterPage />
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Col>
+      </Row>
     );
   }
 }
