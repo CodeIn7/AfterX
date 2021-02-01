@@ -73,7 +73,6 @@ class RegisterPage extends Component {
         initialValues={{ ...registrationValues }}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
           setTimeout(() => {
             const registrationData = {
               email: values.email,
@@ -86,7 +85,7 @@ class RegisterPage extends Component {
               birthDate,
               image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
             };
-
+            console.log(registrationData);
             this.registerUser(registrationData, () => setSubmitting(false));
           }, 500);
         }}
@@ -195,9 +194,11 @@ class RegisterPage extends Component {
                     <DatePicker
                       style={{ width: '100%' }}
                       id="birthDate"
-                      placeholder="Select date"
+                      placeholder="Select birth date"
                       selected={birthDate}
-                      onChange={(date) => this.setState({ birthDate: date })}
+                      onChange={(date, stringDate) =>
+                        this.setState({ birthDate: stringDate })
+                      }
                     />
                   </Form.Item>
                   <Form.Item required justify="center">

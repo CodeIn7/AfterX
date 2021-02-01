@@ -1,4 +1,6 @@
 ﻿using AfterX;
+using AfterX.Contracts.V1;
+using AfterX_backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,12 +12,30 @@ namespace AfterX_backend.Controllers.V1
     public class DrinkClubsController : Controller
     {
 
-        //private IDrinkClubService _drinkClubService;
-        //public DrinkClubsController(IDrinkClubService drinkClubService)
-        //{
-        //    _drinkClubService = drinkClubService;
-        //}
+        private IDrinkClubService _drinkClubService;
+        public DrinkClubsController(IDrinkClubService drinkClubService)
+        {
+            _drinkClubService = drinkClubService;
+        }
 
+        [HttpGet(ApiRoutes.DrinkClubs.GetByReservationId)]
+        public async Task<IActionResult> GetByClubId(int reservationId)
+        {
+            return Ok(await _drinkClubService.GetDrinkClubsByReservationIdAsync(reservationId));
+        }
+
+        [HttpGet(ApiRoutes.DrinkClubs.Get)]
+        public async Task<IActionResult> Details([FromRoute] int drinkClubId)
+        {
+
+            var drinkClub = await _drinkClubService.GetDrinkClubByIdAsync(drinkClubId);
+            if (drinkClub == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(drinkClub);
+        }
         //[HttpGet(ApiRoutes.DrinkClubs.GetAll)]
         //public async Task<IActionResult> Index()
         //{

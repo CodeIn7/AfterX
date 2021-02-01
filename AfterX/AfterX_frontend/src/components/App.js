@@ -13,41 +13,16 @@ import DrinkContainer from '../containers/DrinkContainer/DrinkContainer.js';
 import ClubContainer from '../containers/ClubContainer/ClubContainer';
 import HomeContainer from '../containers/HomeContainer/HomeContainer.js';
 import ReservationContainer from '../containers/ReservationContainer/ReservationContainer.js';
+import Layout from '../containers/Layout/Layout';
 // null   Anyone Can go inside
 // true   only logged in user can go inside
 // false  logged in user can't go inside
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentUser: null,
-    };
-  }
-
-  componentDidMount() {
-    currentUser.subscribe((x) => this.setState({ currentUser: x }));
-  }
-
-  _logout() {
-    logout();
-    // this.props.history.push('/login');
-  }
-
   render() {
-    const { currentUser } = this.state;
     return (
+      // <Layout>
       <Suspense fallback={<div>Loading...</div>}>
-        {currentUser ? (
-          <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <div className="navbar-nav">
-              <button onClick={this._logout} className="nav-item nav-link">
-                Logout
-              </button>
-            </div>
-          </nav>
-        ) : null}
         <div style={{ paddingTop: '0px', minHeight: 'calc(100vh - 80px)' }}>
           <Switch>
             <Route exact path="/" component={LandingPage} />
@@ -63,7 +38,6 @@ class App extends React.Component {
             <PrivateRoute exact path="/clubs" component={ClubContainer} />
             <PrivateRoute exact path="/home" component={HomeContainer} />
             <PrivateRoute
-              exact
               path="/reservations"
               component={ReservationContainer}
             />
@@ -71,6 +45,7 @@ class App extends React.Component {
           <CustomChatbot />
         </div>
       </Suspense>
+      // </Layout>
     );
   }
 }

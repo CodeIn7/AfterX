@@ -44,13 +44,18 @@ export class ReservationListComponent extends Component {
           key: 'action',
           render: (text, record) => (
             <Space size="middle">
+              {console.log(text, record)}
               <Button
                 type="primary"
-                onClick={() => this.navigateTo(`${props.path}/edit`)}
+                onClick={() =>
+                  this.navigateTo(`/reservations/orders/${record.id}`)
+                }
               >
                 Ordres
               </Button>
-              <Button>Delete</Button>
+              <Button onClick={() => this.deleteReservation(record.id)}>
+                Delete
+              </Button>
             </Space>
           ),
         },

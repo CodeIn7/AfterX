@@ -67,6 +67,7 @@ namespace AfterX.Contracts.V1
             public const string Update = Base + "/drinkClubs/{drinkClubsId}";
             public const string Delete = Base + "/drinkClubs/{drinkClubsId}";
             public const string Get = Base + "/drinkClubs/{drinkClubsId}";
+            public const string GetByReservationId = Base + "/drinkClubs/reservation/{reservationId}";
         }
         public static class Reservations
         {
@@ -85,6 +86,7 @@ namespace AfterX.Contracts.V1
             public const string Delete = Base + "/orders/{ordersId}";
             public const string Done = Base + "/orders/done/{orderId}";
             public const string Get = Base + "/orders/{ordersId}";
+            public const string GetByReservationId = Base + "/orders/reservation/{reservationId}";
         }
         public static class Identity
         {

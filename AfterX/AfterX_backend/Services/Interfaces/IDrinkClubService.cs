@@ -15,5 +15,6 @@ namespace AfterX_backend.Services.Interfaces
         Task<bool> DeleteDrinkClubAsync(int drinkClubId);
 
         Task<bool> CreateDrinkClubListAsync(List<DrinkClub> tables);
+        Task<List<DrinkClub>> GetDrinkClubsByReservationIdAsync(int reservationId);
     }
 }

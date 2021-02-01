@@ -10,10 +10,11 @@ namespace AfterX_backend.Services.Interfaces
     {
         Task<List<Order>> GetOrdersAsync(User bartender);
         Task<Order> GetOrderByIdAsync(int orderId);
-        Task<bool> CreateOrderAsync(Order order);
+        Task<bool> CreateOrderAsync(Order order, List<OrderDrink> orderDrinks);
         Task<bool> UpdateOrderAsync(Order cityToUpdate);
         Task<bool> DeleteOrderAsync(int orderId);
         Task<bool> DeactivateOrderAsync(int orderId);
         Task<bool> CreateOrdersAsync(List<Order> orders);
+        Task<List<Order>> GetOrdersByReservationIdAsync(int reservationId);
     }
 }

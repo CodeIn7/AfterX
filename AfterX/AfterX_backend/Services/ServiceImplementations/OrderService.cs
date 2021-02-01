@@ -15,13 +15,7 @@ namespace AfterX_backend.Services.ServiceImplementations
         {
             _dataContext = dataContext;
         }
-        public async Task<bool> CreateOrderAsync(Order order)
-        {
-            _dataContext.Add(order);
-            var updated = await _dataContext.SaveChangesAsync();
 
-            return updated > 0;
-        }
 
         public async Task<bool> DeleteOrderAsync(int orderId)
         {
@@ -70,6 +64,25 @@ namespace AfterX_backend.Services.ServiceImplementations
             order.Active = false;
             _dataContext.Update(order);
             var updated = await _dataContext.SaveChangesAsync();
+            return updated > 0;
+        }
+
+        public async Task<List<Order>> GetOrdersByReservationIdAsync(int reservationId)
+        {
+            return await _dataContext.Orders.Include(order => order.OrderDrinks).ThenInclude(o=>  o.Drink)
+            .Where(order => order.Reservationid == reservationId).ToListAsync();
+        }
+
+        public async Task<bool> CreateOrderAsync(Order order, List<OrderDrink> orderDrinks)
+        {
+            var reservation = await _dataContext.Reservations.FirstOrDefaultAsync(a => a.Id == order.Reservationid);
+            order.Tableid = reservation.Tableid;
+
+            order.OrderDrinks = orderDrinks;
+
+            _dataContext.Add(order);
+            var updated = await _dataContext.SaveChangesAsync();
+
             return updated > 0;
         }
     }

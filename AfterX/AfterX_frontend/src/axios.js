@@ -15,9 +15,11 @@ const instance = axios.create({
 instance.interceptors.request.use(
   async (config) => {
     const user = localStorage.getItem('currentUser');
-    const { token } = JSON.parse(user);
-    config.headers.authorization = `Bearer ${token}`;
-    const decodedToken = jwt.decode(token, { complete: true });
+    if (user) {
+      const { token } = JSON.parse(user);
+      config.headers.authorization = `Bearer ${token}`;
+      const decodedToken = jwt.decode(token, { complete: true });
+    }
     return config;
   },
   (error) => Promise.reject(error)

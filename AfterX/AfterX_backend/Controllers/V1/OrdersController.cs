@@ -14,7 +14,7 @@ namespace AfterX_backend.Controllers.V1
 {
     public class OrdersController : Controller
     {
-        private IOrderService _orderService; 
+        private IOrderService _orderService;
         private readonly UserManager<User> _userManager;
         public OrdersController(IOrderService orderService, UserManager<User> userManager)
         {
@@ -27,11 +27,11 @@ namespace AfterX_backend.Controllers.V1
         {
             System.Security.Claims.ClaimsPrincipal currentUser = this.User;
             var currentUserName = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-           // if(!currentUser.IsInRole("BARTENDER")) return Forbid();
+            // if(!currentUser.IsInRole("BARTENDER")) return Forbid();
 
             User user = await _userManager.FindByNameAsync(currentUserName);
 
-            
+
             return Ok(await _orderService.GetOrdersAsync(user));
         }
 
@@ -47,13 +47,49 @@ namespace AfterX_backend.Controllers.V1
             return Ok(order);
         }
 
+        [HttpGet(ApiRoutes.Orders.GetByReservationId)]
+        public async Task<IActionResult> GetByReservationId([FromRoute] int reservationId)
+        {
+            var order = await _orderService.GetOrdersByReservationIdAsync(reservationId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(order);
+        }
+
         [HttpPost(ApiRoutes.Orders.Create)]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromBody] PostOrderRequest request)
         {
-            var order = new Order {};
 
-            var created = await _orderService.CreateOrderAsync(order);
+            var order = new Order
+            {
+                Active = true,
+                Note = request.Note,
+                Reservationid = request.Reservationid,
+                //Tableid = request.Tableid,
+                Time = request.Time.TimeOfDay,
+            };
+
+            // await _orderService.CreateOrderAsync(order);
+
+            List<OrderDrink> orderDrinks = new List<OrderDrink>();
+
+            foreach (var drink in request.drinks)
+            {
+                var orderDrink = new OrderDrink
+                {
+                    Drinkid = drink.Drinkid,
+                    Nobottles = drink.Nobottles,
+                    // Orderid = order.Id,
+                };
+                orderDrinks.Add(orderDrink);
+            };
+            //await _orderDrinkService.CreateOrdersAsync(orderDrinks);
+
+            var created= await _orderService.CreateOrderAsync(order, orderDrinks);
 
             if (!created)
             {
@@ -65,7 +101,11 @@ namespace AfterX_backend.Controllers.V1
 
             var response = new PostOrderResponse
             {
-
+                Id=order.Id,
+                Note=order.Note,
+                Active = order.Active,
+                Tableid= order.Tableid,
+                Time= order.Time
             };
 
             return Created(locationUri, response);
@@ -103,9 +143,9 @@ namespace AfterX_backend.Controllers.V1
 
         [HttpDelete(ApiRoutes.Orders.Delete)]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed([FromRoute] int orderId)
+        public async Task<IActionResult> DeleteConfirmed([FromRoute] int ordersId)
         {
-            var deleted = await _orderService.DeleteOrderAsync(orderId);
+            var deleted = await _orderService.DeleteOrderAsync(ordersId);
 
             if (!deleted)
                 return NotFound();

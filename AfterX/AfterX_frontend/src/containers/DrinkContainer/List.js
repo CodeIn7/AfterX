@@ -106,7 +106,7 @@ class List extends Component {
         </Button>
         <Table columns={columns} dataSource={data} />
         <Drawer
-          title="Create a new account"
+          title="Create a new drink"
           width={720}
           onClose={this.onClose}
           visible={visibleAddEdit}

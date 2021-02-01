@@ -62,5 +62,12 @@ namespace AfterX_backend.Services.ServiceImplementations
             var updated = await _dataContext.SaveChangesAsync();
             return updated > 0;
         }
+
+        public async Task<List<DrinkClub>> GetDrinkClubsByReservationIdAsync(int reservationId)
+        {
+            var reservation = await _dataContext.Reservations.Include(a=>a.Table).FirstOrDefaultAsync(a => a.Id == reservationId);
+            return await _dataContext.DrinkClubs.Include(a=>a.Drink).Where(s => s.Clubid == reservation.Table.Clubid).ToListAsync();
+        }
+
     }
 }
